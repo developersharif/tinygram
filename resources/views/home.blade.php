@@ -133,15 +133,28 @@
                                                     style="cursor: auto;">...</span>
                                             </div>
                                         </div>
-                                        <details class="dropdown dropdown-end">
-                                            <summary class="m-1 btn"><i class="fa-solid fa-ellipsis-vertical"></i>
-                                            </summary>
-                                            <ul
-                                                class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
-                                                <li><a><i class="fa-regular fa-pen-to-square"></i> Edit</a></li>
-                                                <li><a><i class="fa-solid fa-trash-can"></i> Delete</a></li>
-                                            </ul>
-                                        </details>
+                                        @can('update', $post)
+                                            <details class="dropdown dropdown-end">
+                                                <summary class="m-1 btn"><i class="fa-solid fa-ellipsis-vertical"></i>
+                                                </summary>
+                                                <ul
+                                                    class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                                                    <li><a onclick="my_modal_5.showModal()"><i
+                                                                class="fa-regular fa-pen-to-square"></i> Edit</a></li>
+                                                    <li>
+                                                        <form method="POST"
+                                                            action="{{ route('post.destroy', $post->id) }}">
+                                                            @csrf
+                                                            @method('DELETE')
+
+                                                            <button type="submit"
+                                                                onclick="return confirm('Are you sure you want to delete this resource?')"><i
+                                                                    class="fa-solid fa-trash-can"></i> Delete</button>
+                                                        </form>
+                                                    </li>
+                                                </ul>
+                                            </details>
+                                        @endcan
                                     </div>
                                     <img src="storage/photos/{{ $post->image }}"
                                         class="object-cover object-center w-full h-72 bg-coolGray-500"

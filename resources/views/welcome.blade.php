@@ -22,9 +22,9 @@
     <div class="container mx-auto grid grid-flow-col gap-1">
         <section-left class="p-4 bg-gray-100 hidden sm:block">
             <!-- Column 1 Content -->
-            <div class="sm:w-60 min-h-screen w-14 pt-4 transition-all md:sticky md:top-0">
+            <div class="sm:w-60 min-h-screen w-14 pt-4 transition-all md:sticky md:top-0 ">
                 <div class="text-center text-black p-6">
-                    TinyGram
+                    <a href="{{route('home')}}">{{env('APP_NAME')}}</a>
                 </div>
                 <ul class="mt-5">
                     <li
@@ -51,6 +51,34 @@
                         <span class="ml-3 hidden sm:block font-semibold tracking-wide ">
                             Messages</span>
                     </li>
+                    <li class="hover:bg-gray-800 hover:text-white cursor-pointer sm:justify-start px-4 h-12 flex items-center justify-center"
+                        onclick="my_modal_5.showModal()">
+                        <i class="fa-regular fa-square-plus"></i>
+                        <span class="ml-3 hidden sm:block font-semibold tracking-wide">
+                            Create</span>
+                        <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+                            <div class="modal-box text-black">
+                                <h3 class="font-bold text-lg">Share your thoughts!?</h3>
+                                <form action="{{route('post.store')}}" method="post" enctype="multipart/form-data">
+                                    <p class="py-4">
+                                        <textarea name="body" placeholder="Whats On Your Mind!"
+                                            class="textarea textarea-bordered textarea-lg w-full max-w-xs"></textarea>
+                                        <input type="file" name="photo"
+                                            class="file-input file-input-ghost w-full max-w-xs" />
+                                        @csrf
+                                    </p>
+                                    <button type="submit" class="btn btn-outline">Post</button>
+                                </form>
+
+                                <div class="modal-action">
+                                    <form method="dialog">
+                                        <!-- if there is a button in form, it will close the modal -->
+                                        <button class="btn">Close</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </dialog>
+                    </li>
                     <li
                         class="hover:bg-gray-800 hover:text-white cursor-pointer sm:justify-start px-4 h-12 flex items-center justify-center">
                         <i class="fa-regular fa-user"></i>
@@ -60,7 +88,7 @@
                 </ul>
             </div>
         </section-left>
-        <section-middle class=" p-4 bg-gray-100">
+        <section-middle class=" bg-gray-100">
             <!-- Column 2 Content -->
 
             <!--Post Card Start-->
@@ -76,9 +104,9 @@
                                             style="cursor: auto;">
                                         <div class="-space-y-1" style="cursor: auto;">
                                             <h2 class="text-sm font-semibold leading-none" style="cursor: auto;">
-                                                External_</h2>
+                                                sharif</h2>
                                             <span class="inline-block text-xs leading-none text-coolGray-400"
-                                                style="cursor: auto;">New York City</span>
+                                                style="cursor: auto;">Dhaka City</span>
                                         </div>
                                     </div>
                                     <details class="dropdown dropdown-end">
@@ -313,13 +341,34 @@
         </section-middle>
         <section-right class=" p-4 bg-gray-100 hidden sm:block">
             <!-- Column 3 Content -->
-            <div class="container w-52">
+            <div class=" w-52">
                 <small>Suggested for you . <a href="">See All</a></small>
                 <ul>
-                    <li>User Open</li>
-                    <li>User Two</li>
-                    <li>User there</li>
-                    <li>User Four</li>
+                    <li>
+                        <div class="users-list flex items-center gap-2 mt-4">
+                            <img src="https://source.unsplash.com/user/c_v_r/1600x900"
+                                class="object-cover object-center w-8 h-8 rounded-full shadow-sm bg-coolGray-500 border-coolGray-700"
+                                alt="username">
+                            <p><a href="" class="text-sm">User Name</a></p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="users-list flex items-center gap-2 mt-4">
+                            <img src="https://source.unsplash.com/user/c_v_r/1600x900"
+                                class="object-cover object-center w-8 h-8 rounded-full shadow-sm bg-coolGray-500 border-coolGray-700"
+                                alt="username">
+                            <p><a href="">User Name</a></p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="users-list flex items-center gap-2 mt-4">
+                            <img src="https://source.unsplash.com/user/c_v_r/1600x900"
+                                class="object-cover object-center w-8 h-8 rounded-full shadow-sm bg-coolGray-500 border-coolGray-700"
+                                alt="username">
+                            <p><a href="">User Name</a></p>
+                        </div>
+                    </li>
+
                 </ul>
             </div>
         </section-right>

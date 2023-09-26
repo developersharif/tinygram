@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +17,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('auth')->name('home');
+
+Route::resource('/post', PostController::class)->names([
+    'create' => 'post.create',
+    'store' => 'post.store',
+    'index' => 'post.index',
+    'show' => 'post.show',
+    'edit' => 'post.edit',
+    'update' => 'post.update',
+    'destroy' => 'post.destroy',
+]);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

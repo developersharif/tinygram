@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -13,8 +14,9 @@ class PostController extends Controller
      */
     public function index()
     {
+        $suggested_user = User::all();
         $posts = Post::with('user')->where('status',1)->orderBy('id','desc')->get();
-        return view('home',['posts' => $posts]);
+        return view('home',['posts' => $posts,'suggested_users' => $suggested_user]);
     }
 
     /**

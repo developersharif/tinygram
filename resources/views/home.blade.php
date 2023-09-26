@@ -188,7 +188,7 @@
                                         </div>
                                         <div class="space-y-3" style="cursor: auto;">
                                             <p class="text-sm" style="cursor: auto;">
-                                                <span class="text-base font-semibold">External_</span>
+                                                <span class="text-base font-semibold">{{ $post->user->name }}</span>
                                                 {{ $post->body }}
                                             </p>
                                             <input type="text" placeholder="Add a comment..."
@@ -208,14 +208,17 @@
             <div class=" w-52">
                 <small>Suggested for you . <a href="">See All</a></small>
                 <ul>
-                    <li>
-                        <div class="users-list flex items-center gap-2 mt-4">
-                            <img src="https://source.unsplash.com/user/c_v_r/1600x900"
-                                class="object-cover object-center w-8 h-8 rounded-full shadow-sm bg-coolGray-500 border-coolGray-700"
-                                alt="username">
-                            <p><a href="" class="text-sm">User Name</a></p>
-                        </div>
-                    </li>
+                    @foreach ($suggested_users as $suggested_user)
+                        <li>
+                            <div class="users-list flex items-center gap-2 mt-4">
+                                <img src="storage/profile/{{ $suggested_user->avatar }}"
+                                    alt="{{ $suggested_user->name }}"
+                                    class="object-cover object-center w-8 h-8 rounded-full shadow-sm bg-coolGray-500 border-coolGray-700"
+                                    alt="username">
+                                <p><a href="" class="text-sm">U{{ $suggested_user->name }}</a></p>
+                            </div>
+                        </li>
+                    @endforeach
                     <li>
                         <div class="users-list flex items-center gap-2 mt-4">
                             <img src="https://source.unsplash.com/user/c_v_r/1600x900"

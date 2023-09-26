@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class PostFactory extends Factory
 {
-    private $model = Post::class;
+    protected $model = Post::class;
     /**
      * Define the model's default state.
      *

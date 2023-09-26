@@ -15,9 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->middleware('auth')->name('home');
+Route::get('/',[PostController::class,'index'])->middleware('auth')->name('home');
 
 Route::resource('/post', PostController::class)->names([
     'create' => 'post.create',

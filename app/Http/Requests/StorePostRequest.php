@@ -23,7 +23,7 @@ class StorePostRequest extends FormRequest
     {
         return [
             'body'=>'max:255',
-            'photo'=>'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'photo'=>'required|image|mimes:jpeg,png,jpg,gif,webp|max:3072'
         ];
     }
 }

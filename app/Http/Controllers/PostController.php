@@ -13,7 +13,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::with('user')->where('status',1)->orderBy('id','desc')->get();
+        return view('home',['posts' => $posts]);
     }
 
     /**

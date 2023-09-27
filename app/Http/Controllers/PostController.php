@@ -58,7 +58,10 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post = Post::all();
+        $users = User::all();
+        // $this->authorize('update',$post);
+        return view('post.edit', array('posts' => $post,'users'=>$users));
     }
 
     /**

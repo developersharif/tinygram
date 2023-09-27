@@ -29,9 +29,11 @@
                 <ul class="mt-5">
                     <li
                         class="hover:bg-gray-800 hover:text-white cursor-pointer sm:justify-start px-4 h-12 flex items-center justify-center active">
+
                         <i class="fa-solid fa-house"></i>
-                        <span class="ml-3 hidden sm:block  font-semibold tracking-wide">
-                            Home</span>
+                        <a href="{{ route('home') }}">
+                            <span class="ml-3 hidden sm:block  font-semibold tracking-wide">
+                                Home</span></a>
                     </li>
                     <li
                         class="hover:bg-gray-800 hover:text-white cursor-pointer sm:justify-start px-4 h-12 flex items-center justify-center">
@@ -60,17 +62,16 @@
                             <div class="modal-box text-black">
                                 <h3 class="font-bold text-lg">Share your thoughts!?</h3>
                                 @if ($errors->any())
-                                    @foreach ($errors->all() as $error)
-                                        <div class="alert alert-error">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="stroke-current shrink-0 h-6 w-6" fill="none"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                            </svg>
-                                            <span>Error! {{ $error }}.</span>
-                                        </div>
-                                    @endforeach
+                                @foreach ($errors->all() as $error)
+                                <div class="alert alert-error">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6"
+                                        fill="none" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <span>Error! {{ $error }}.</span>
+                                </div>
+                                @endforeach
 
                                 @endif
                                 <form action="{{ route('post.store') }}" method="post" enctype="multipart/form-data">
@@ -115,105 +116,103 @@
         </section-left>
         <section-middle class=" bg-gray-100">
             @foreach ($posts as $post)
-                <!--Post Card Start-->
-                <div class="container">
-                    <div>
-                        <div class="p-3 px-6 min-h-48 flex justify-center items-center" style="cursor: auto;">
-                            <custom-card3>
-                                <div class="rounded-md shadow-md sm:w-96 bg-coolGray-900 text-coolGray-100">
-                                    <div class="flex items-center justify-between p-3" style="cursor: auto;">
-                                        <div class="flex items-center space-x-2" style="cursor: auto;">
-                                            <img src="/storage/profile/{{ $post->user->avatar }}" alt=""
-                                                class="object-cover object-center w-8 h-8 rounded-full shadow-sm bg-coolGray-500 border-coolGray-700"
-                                                style="cursor: auto;">
-                                            <div class="-space-y-1" style="cursor: auto;">
-                                                <h2 class="text-sm font-semibold leading-none" style="cursor: auto;">
-                                                    {{ $post->user->name }}</h2>
-                                                <span class="inline-block text-xs leading-none text-coolGray-400"
-                                                    style="cursor: auto;">...</span>
-                                            </div>
+            <!--Post Card Start-->
+            <div class="container">
+                <div>
+                    <div class="p-3 px-6 min-h-48 flex justify-center items-center" style="cursor: auto;">
+                        <custom-card3>
+                            <div class="rounded-md shadow-md sm:w-96 bg-coolGray-900 text-coolGray-100">
+                                <div class="flex items-center justify-between p-3" style="cursor: auto;">
+                                    <div class="flex items-center space-x-2" style="cursor: auto;">
+                                        <img src="/storage/profile/{{ $post->user->avatar }}" alt=""
+                                            class="object-cover object-center w-8 h-8 rounded-full shadow-sm bg-coolGray-500 border-coolGray-700"
+                                            style="cursor: auto;">
+                                        <div class="-space-y-1" style="cursor: auto;">
+                                            <h2 class="text-sm font-semibold leading-none" style="cursor: auto;">
+                                                {{ $post->user->name }}</h2>
+                                            <span class="inline-block text-xs leading-none text-coolGray-400"
+                                                style="cursor: auto;">{{$post->created_at->diffForHumans()}}</span>
                                         </div>
-                                        @can('update', $post)
-                                            <details class="dropdown dropdown-end">
-                                                <summary class="m-1 btn"><i class="fa-solid fa-ellipsis-vertical"></i>
-                                                </summary>
-                                                <ul
-                                                    class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
-                                                    <li><a onclick="my_modal_5.showModal()"><i
-                                                                class="fa-regular fa-pen-to-square"></i> Edit</a></li>
-                                                    <li>
-                                                        <form method="POST"
-                                                            action="{{ route('post.destroy', $post->id) }}">
-                                                            @csrf
-                                                            @method('DELETE')
-
-                                                            <button type="submit"
-                                                                onclick="return confirm('Are you sure you want to delete this resource?')"><i
-                                                                    class="fa-solid fa-trash-can"></i> Delete</button>
-                                                        </form>
-                                                    </li>
-                                                </ul>
-                                            </details>
-                                        @endcan
                                     </div>
-                                    <img src="storage/photos/{{ $post->image }}"
-                                        class="object-cover object-center w-full h-72 bg-coolGray-500"
-                                        style="cursor: auto;">
-                                    <div class="p-3" style="cursor: auto;">
-                                        <div class="flex items-center justify-between" style="cursor: auto;">
-                                            <div class="flex items-center space-x-3">
-                                                <button type="button" title="Like post"
-                                                    class="flex items-center justify-center">
-                                                    <i class="fa-regular fa-heart"></i>
-                                                </button>
-                                                <button type="button" title="Add a comment"
-                                                    class="flex items-center justify-center">
-                                                    <i class="fa-regular fa-comment"></i>
-                                                </button>
-                                                <button type="button" title="Share post"
-                                                    class="flex items-center justify-center">
-                                                    <i class="fa-solid fa-retweet"></i>
-                                                </button>
-                                            </div>
-                                            <button type="button" title="Bookmark post"
+                                    @can('update', $post)
+                                    <details class="dropdown dropdown-end">
+                                        <summary class="m-1 btn"><i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </summary>
+                                        <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                                            <li><a href="{{route('post.edit',$post->id)}}"><i
+                                                        class="fa-regular fa-pen-to-square"></i> Edit</a></li>
+                                            <li>
+                                                <form method="POST" action="{{ route('post.destroy', $post->id) }}">
+                                                    @csrf
+                                                    @method('DELETE')
+
+                                                    <button type="submit"
+                                                        onclick="return confirm('Are you sure you want to delete this resource?')"><i
+                                                            class="fa-solid fa-trash-can"></i> Delete</button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </details>
+                                    @endcan
+                                </div>
+                                <img src="storage/photos/{{ $post->image }}"
+                                    class="object-cover object-center w-full h-72 bg-coolGray-500"
+                                    style="cursor: auto;">
+                                <div class="p-3" style="cursor: auto;">
+                                    <div class="flex items-center justify-between" style="cursor: auto;">
+                                        <div class="flex items-center space-x-3">
+                                            <button type="button" title="Like post"
                                                 class="flex items-center justify-center">
-                                                <i class="fa-regular fa-bookmark"></i>
+                                                <i class="fa-regular fa-heart"></i>
+                                            </button>
+                                            <button type="button" title="Add a comment"
+                                                class="flex items-center justify-center">
+                                                <i class="fa-regular fa-comment"></i>
+                                            </button>
+                                            <button type="button" title="Share post"
+                                                class="flex items-center justify-center">
+                                                <i class="fa-solid fa-retweet"></i>
                                             </button>
                                         </div>
-                                        <div class="flex flex-wrap items-center pt-3 pb-1" style="cursor: auto;">
-                                            <div class="flex items-center space-x-2">
-                                                <div class="flex -space-x-1">
-                                                    <img alt=""
-                                                        class="w-5 h-5 border rounded-full bg-coolGray-500 border-coolGray-800"
-                                                        src="https://source.unsplash.com/user/c_v_r/1600x900">
-                                                    <img alt=""
-                                                        class="w-5 h-5 border rounded-full bg-coolGray-500 border-coolGray-800"
-                                                        src="https://stackdiary.com/140x100.png">
-                                                    <img alt=""
-                                                        class="w-5 h-5 border rounded-full bg-coolGray-500 border-coolGray-800"
-                                                        src="https://source.unsplash.com/user/c_v_r/1600x900"><!---->
-                                                </div>
-                                                <span class="text-sm"> Liked by
-                                                    <span class="font-semibold">Pixels</span> and
-                                                    <span class="font-semibold">20 others</span>
-                                                </span>
+                                        <button type="button" title="Bookmark post"
+                                            class="flex items-center justify-center">
+                                            <i class="fa-regular fa-bookmark"></i>
+                                        </button>
+                                    </div>
+                                    <div class="flex flex-wrap items-center pt-3 pb-1" style="cursor: auto;">
+                                        <div class="flex items-center space-x-2">
+                                            <div class="flex -space-x-1">
+                                                <img alt=""
+                                                    class="w-5 h-5 border rounded-full bg-coolGray-500 border-coolGray-800"
+                                                    src="https://source.unsplash.com/user/c_v_r/1600x900">
+                                                <img alt=""
+                                                    class="w-5 h-5 border rounded-full bg-coolGray-500 border-coolGray-800"
+                                                    src="https://stackdiary.com/140x100.png">
+                                                <img alt=""
+                                                    class="w-5 h-5 border rounded-full bg-coolGray-500 border-coolGray-800"
+                                                    src="https://source.unsplash.com/user/c_v_r/1600x900"><!---->
                                             </div>
-                                        </div>
-                                        <div class="space-y-3" style="cursor: auto;">
-                                            <p class="text-sm" style="cursor: auto;">
-                                                <span class="text-base font-semibold">{{ $post->user->name }}</span>
-                                                {{ $post->body }}
-                                            </p>
-                                            <input type="text" placeholder="Add a comment..."
-                                                class="w-full py-0.5 bg-transparent border-none rounded text-sm pl-0 text-coolGray-100"
-                                                style="cursor: auto;">
+                                            <span class="text-sm"> Liked by
+                                                <span class="font-semibold">Pixels</span> and
+                                                <span class="font-semibold">20 others</span>
+                                            </span>
                                         </div>
                                     </div>
+                                    <div class="space-y-3" style="cursor: auto;">
+                                        <p class="text-sm" style="cursor: auto;">
+                                            <span class="text-base font-semibold">{{ $post->user->name }}</span>
+                                            {{ $post->body }}
+                                        </p>
+                                        <input type="text" placeholder="Add a comment..."
+                                            class="w-full py-0.5 bg-transparent border-none rounded text-sm pl-0 text-coolGray-100"
+                                            style="cursor: auto;">
+                                    </div>
                                 </div>
-                            </custom-card3>
-                        </div>
+                            </div>
+                        </custom-card3>
                     </div>
                 </div>
+            </div>
             @endforeach
         </section-middle>
         <section-right class=" p-4 bg-gray-100 hidden sm:block">
@@ -222,15 +221,14 @@
                 <small>Suggested for you . <a href="">See All</a></small>
                 <ul>
                     @foreach ($suggested_users as $suggested_user)
-                        <li>
-                            <div class="users-list flex items-center gap-2 mt-4">
-                                <img src="storage/profile/{{ $suggested_user->avatar }}"
-                                    alt="{{ $suggested_user->name }}"
-                                    class="object-cover object-center w-8 h-8 rounded-full shadow-sm bg-coolGray-500 border-coolGray-700"
-                                    alt="username">
-                                <p><a href="" class="text-sm">U{{ $suggested_user->name }}</a></p>
-                            </div>
-                        </li>
+                    <li>
+                        <div class="users-list flex items-center gap-2 mt-4">
+                            <img src="storage/profile/{{ $suggested_user->avatar }}" alt="{{ $suggested_user->name }}"
+                                class="object-cover object-center w-8 h-8 rounded-full shadow-sm bg-coolGray-500 border-coolGray-700"
+                                alt="username">
+                            <p><a href="" class="text-sm">U{{ $suggested_user->name }}</a></p>
+                        </div>
+                    </li>
                     @endforeach
                     <li>
                         <div class="users-list flex items-center gap-2 mt-4">

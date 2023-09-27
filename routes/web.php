@@ -28,7 +28,7 @@ Route::resource('/post', PostController::class)->names([
 ])->middleware('auth');
 
 Route::get("/@{id}",function($id){
-    return $id;
+    return view("profile.public");
 })->name('user.profile');
 
 Route::get('/dashboard', function () {

@@ -25,7 +25,11 @@ Route::resource('/post', PostController::class)->names([
     'edit' => 'post.edit',
     'update' => 'post.update',
     'destroy' => 'post.destroy',
-]);
+])->middleware('auth');
+
+Route::get("/@{id}",function($id){
+    return $id;
+})->name('user.profile');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

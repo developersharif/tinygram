@@ -68,7 +68,22 @@ class PostController extends Controller
      */
     public function update(StorePostRequest $request, string $id)
     {
-        //
+        $post = Post::find($id);
+        if($request->hasFile('photo')){
+            $postBody = $request->body;
+            $photo = $request->file('photo');
+            $photo->store("public/photos");
+            $photoName = $photo->hashName();
+            $post->body = $postBody;
+            $post->image = $photoName;
+            $post->update();
+            return redirect()->route('home')->with('post','post updated successfully');
+        }else{
+            $postBody = $request->body;
+            $post->body = $postBody;
+            $post->update();
+            return redirect()->route('home')->with('post','post updated successfully');
+        }
     }
 
     /**

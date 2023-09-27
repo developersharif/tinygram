@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -23,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::creator("components.post.layout",function($view){
-            $users = User::all();
+            $users = User::whereNot('id',Auth::user()->id)->whereNotNull('email_verified_at')->get();
             $posts = Post::with('user')->where('status',1)->orderBy('id','desc')->get();
             $view->with("posts",$posts);
             $view->with("users",$users);

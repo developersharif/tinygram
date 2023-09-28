@@ -1,4 +1,4 @@
-<div class="container mx-auto grid grid-flow-col gap-1">
+<div class="container mx-auto grid grid-flow-col gap-1 mb-2">
     <section-left class="p-4  hidden sm:block">
         <!-- Column 1 Content -->
         <div class="sm:w-60 min-h-screen w-14 pt-2 transition-all md:sticky md:top-0 ">
@@ -120,3 +120,38 @@
             </ul>
         </div>
     </section-left>
+    <section-left-mobile class="block md:hidden fixed bottom-0 w-full z-50">
+        <ul class="menu flex flex-row justify-between rounded-box mt-6 w-full glass backdrop-blur-md">
+            <li>
+                <a class="tooltip" data-tip="Home" href="{{ route('home') }}">
+                    <i class="fa-solid fa-house"></i>
+                </a>
+            </li>
+            <li>
+                <a class="tooltip" data-tip="Search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </a>
+            </li>
+            <li>
+                <a class="tooltip" data-tip="Create Post">
+                    <i class="fa-regular fa-square-plus"></i>
+                </a>
+            </li>
+            <li>
+                <a class="tooltip" data-tip="Messages">
+                    <i class="fa-regular fa-message"></i>
+                </a>
+            </li>
+            <li>
+                <a class="tooltip" data-tip="Notification">
+                    <i class="fa-regular fa-bell"></i>
+                </a>
+            </li>
+            <li>
+                <a class="tooltip" data-tip="Menu">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                </a>
+            </li>
+
+        </ul>
+    </section-left-mobile>

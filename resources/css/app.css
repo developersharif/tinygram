@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Hide the default scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    /* Set the width of the scrollbar */
+}
+
+/* Style the scrollbar track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* Set the background color of the track */
+}
+
+/* Style the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    /* Set the background color of the thumb */
+    border-radius: 10px;
+    /* Add rounded corners to the thumb */
+}
+
+/* Change the color of the thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

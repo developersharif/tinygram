@@ -7,7 +7,7 @@
     <section-middle class=" bg-gray-100">
         <div class="container">
             <div>
-                <div class="p-3 px-6 min-h-48 flex justify-center items-center" style="cursor: auto;">
+                <div class="w-full min-h-48 flex justify-center items-center">
                     {{ $content }}
                 </div>
             </div>

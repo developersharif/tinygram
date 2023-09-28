@@ -3,12 +3,12 @@
                 <!--Post Card Start-->
                 <div>
                     <div>
-                        <div class="p-3 px-6 min-h-48 flex justify-center items-center" style="cursor: auto;">
+                        <div class="p-3 px-6 min-h-48 flex justify-center items-center">
                             <custom-card>
                                 <div
                                     class="rounded-md shadow-md sm:w-96 bg-coolGray-900 text-coolGray-100 hover:shadow-none hover:bg-gray-50">
-                                    <div class="flex items-center justify-between p-3" style="cursor: auto;">
-                                        <div class="flex items-center space-x-2" style="cursor: auto;">
+                                    <div class="flex items-center justify-between p-3">
+                                        <div class="flex items-center space-x-2">
                                             <a href="{{ route('user.profile', $post->user->id) }}">
                                                 <img src="{{ asset('storage/profile/' . $post->user->avatar) }}"
                                                     alt=""
@@ -48,7 +48,7 @@
                                         @endcan
                                     </div>
                                     <img src="{{ asset('storage/photos/' . $post->image) }}"
-                                        class="object-cover object-center w-full h-72 bg-coolGray-500"
+                                        class="object-cover object-center block h-auto w-full  bg-coolGray-500"
                                         style="cursor: auto;">
                                     <div class="p-3" style="cursor: auto;">
                                         <div class="flex items-center justify-between" style="cursor: auto;">

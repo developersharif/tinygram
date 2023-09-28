@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::creator("components.post.layout",function($view){
-            $users = User::whereNot('id',Auth::user()->id)->whereNotNull('email_verified_at')->get();
+            $users = User::whereNot('id',Auth::user()->id)->whereNotNull('email_verified_at')->limit(15)->get();
             $posts = Post::with('user')->where('status',1)->orderBy('id','desc')->get();
             $view->with("posts",$posts);
             $view->with("users",$users);

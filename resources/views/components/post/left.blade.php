@@ -121,7 +121,7 @@
         </div>
     </section-left>
     <section-left-mobile class="block md:hidden fixed bottom-0 w-full z-50">
-        <ul class="menu flex flex-row justify-between rounded-box mt-6 w-full glass backdrop-blur-md">
+        <ul class="menu flex flex-row justify-between rounded-box mt-6 w-full space-x-0 backdrop-blur-md text-lg">
             <li>
                 <a class="tooltip" data-tip="Home" href="{{ route('home') }}">
                     <i class="fa-solid fa-house"></i>
@@ -138,17 +138,12 @@
                 </a>
             </li>
             <li>
-                <a class="tooltip" data-tip="Messages">
-                    <i class="fa-regular fa-message"></i>
-                </a>
-            </li>
-            <li>
                 <a class="tooltip" data-tip="Notification">
                     <i class="fa-regular fa-bell"></i>
                 </a>
             </li>
             <li>
-                <a class="tooltip" data-tip="Menu">
+                <a class="tooltip" data-tip="Menu" href="{{ route('profile.edit') }}">
                     <i class="fa-solid fa-bars-staggered"></i>
                 </a>
             </li>

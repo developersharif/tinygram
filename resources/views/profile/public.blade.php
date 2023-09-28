@@ -60,8 +60,7 @@
 
                     <!-- user meta form small screens -->
                     <div class="md:hidden text-sm my-2">
-                        <h1 class="font-semibold">Mr Travlerrr...</h1>
-                        <span>Travel, Nature and Music</span>
+                        <h1 class="font-semibold"> {{ $user->name }}</h1>
                         <p>Lorem ipsum dolor sit amet consectetur</p>
                     </div>
 

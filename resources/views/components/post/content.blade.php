@@ -1,4 +1,4 @@
-        <section-middle class="container bg-white">
+        <section-middle class="container bg-white mb-10">
             @foreach ($posts as $post)
                 <!--Post Card Start-->
                 <div>

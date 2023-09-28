@@ -29,5 +29,8 @@ class AppServiceProvider extends ServiceProvider
             $view->with("posts",$posts);
             $view->with("users",$users);
         });
+        View::creator("profile.edit",function($view){
+            $view->with("user",Auth::user());
+        });
     }
 }

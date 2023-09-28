@@ -1,11 +1,12 @@
 <div class="container mx-auto grid grid-flow-col gap-1">
     <section-left class="p-4  hidden sm:block">
         <!-- Column 1 Content -->
-        <div class="sm:w-60 min-h-screen w-14 pt-4 transition-all md:sticky md:top-0 ">
-            <div class="text-center text-black p-6">
-                <a href="{{ route('home') }}">{{ env('APP_NAME') }}</a>
+        <div class="sm:w-60 min-h-screen w-14 pt-2 transition-all md:sticky md:top-0 ">
+            <div class="text-center text-black p-4">
+                <a href="{{ route('home') }}"><img class="w-20" src="{{ asset('storage/images/tinygramlogo.png') }}"
+                        alt="tinygramLogo" /></a>
             </div>
-            <ul class="mt-5">
+            <ul class="mt-1">
                 <li
                     class="hover:bg-gray-200 hover:text-gray-800 cursor-pointer sm:justify-start px-4 h-12 flex items-center justify-center active">
 
@@ -20,11 +21,23 @@
                     <span class="ml-3 hidden sm:block  font-semibold tracking-wide ">
                         Notification</span>
                 </li>
-                <li
-                    class="hover:bg-gray-200 hover:text-gray-800 cursor-pointer sm:justify-start px-4 h-12 flex items-center justify-center">
+                <li class="hover:bg-gray-200 hover:text-gray-800 cursor-pointer sm:justify-start px-4 h-12 flex items-center justify-center"
+                    onclick="searchModal.showModal()">
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <span class="ml-3 hidden sm:block  font-semibold tracking-wide ">
                         Search</span>
+                    <dialog id="searchModal" class="modal">
+                        <div class="modal-box">
+                            <h3 class="font-bold text-lg">Search!</h3>
+                            <p class="py-4"><input type="text" placeholder="Search here"
+                                    class="input input-bordered w-full max-w-xs" />
+                                <span> <button class="btn btn-outline">Search</button> </span>
+                            </p>
+                        </div>
+                        <form method="dialog" class="modal-backdrop">
+                            <button>close</button>
+                        </form>
+                    </dialog>
                 </li>
                 <li
                     class="hover:bg-gray-200 hover:text-gray-800 cursor-pointer sm:justify-start px-4 h-12 flex items-center justify-center">
@@ -78,7 +91,7 @@
                             <div class="modal-action">
                                 <form method="dialog">
                                     <!-- if there is a button in form, it will close the modal -->
-                                    <button class="btn">Close</button>
+                                    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                                 </form>
                             </div>
                         </div>

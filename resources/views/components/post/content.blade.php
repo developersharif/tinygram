@@ -4,8 +4,9 @@
                 <div>
                     <div>
                         <div class="p-3 px-6 min-h-48 flex justify-center items-center" style="cursor: auto;">
-                            <custom-card3>
-                                <div class="rounded-md shadow-md sm:w-96 bg-coolGray-900 text-coolGray-100">
+                            <custom-card>
+                                <div
+                                    class="rounded-md shadow-md sm:w-96 bg-coolGray-900 text-coolGray-100 hover:shadow-none hover:bg-gray-50">
                                     <div class="flex items-center justify-between p-3" style="cursor: auto;">
                                         <div class="flex items-center space-x-2" style="cursor: auto;">
                                             <img src="{{ asset('storage/profile/' . $post->user->avatar) }}"
@@ -80,7 +81,7 @@
                                                         src="{{ asset('storage/profile/' . $post->user->avatar) }}"><!---->
                                                 </div>
                                                 <span class="text-sm"> Liked by
-                                                    <span class="font-semibold">Pixels</span> and
+                                                    <span class="font-semibold">sharif</span> and
                                                     <span class="font-semibold">20 others</span>
                                                 </span>
                                             </div>
@@ -96,7 +97,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </custom-card3>
+                            </custom-card>
                         </div>
                     </div>
                 </div>

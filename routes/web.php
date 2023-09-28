@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,8 +28,8 @@ Route::resource('/post', PostController::class)->names([
     'destroy' => 'post.destroy',
 ])->middleware('auth');
 
-Route::get("/@{id}",function($id){
-    return view("profile.public");
+Route::get("/@{user}",function(User $user){
+    return view("profile.public",['user'=>$user]);
 })->name('user.profile');
 
 Route::get('/dashboard', function () {

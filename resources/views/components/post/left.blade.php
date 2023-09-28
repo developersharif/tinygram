@@ -20,6 +20,7 @@
                     <i class="fa-regular fa-bell"></i>
                     <span class="ml-3 hidden sm:block  font-semibold tracking-wide ">
                         Notification</span>
+                    <sup class="badge badge-error text-white text-xs">+4</sup>
                 </li>
                 <li class="hover:bg-gray-200 hover:text-gray-800 cursor-pointer sm:justify-start px-4 h-12 flex items-center justify-center"
                     onclick="searchModal.showModal()">

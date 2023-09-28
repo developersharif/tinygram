@@ -112,37 +112,146 @@
 
                         <!-- column -->
                         <div class="w-1/3 p-px md:px-3">
-                            <!-- post 1-->
+                            {{-- post start --}}
                             <a href="#">
-                                <article class="post  text-black relative pb-full">
-                                    <!-- post image-->
-                                    <img class="w-full h-full left-0 top-0 object-cover"
-                                        src="https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80"
-                                        alt="image">
-
-                                    <i class="fas fa-square absolute right-0 top-0 m-1"></i>
-                                    <!-- overlay-->
-                                    <div
-                                        class="overlay bg-gray-800 bg-opacity-25 w-full h-full absolute
-                                left-0 top-0 hidden">
-                                        <div
-                                            class="flex justify-center items-center
+                                <section-post>
+                                    <!-- Card -->
+                                    <div class=" group">
+                                        <div class="relative overflow-hidden">
+                                            <img class=" w-full object-cover"
+                                                src="https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80"
+                                                alt="">
+                                            <div
+                                                class="absolute h-full w-full bg-black/20 flex items-center justify-center -bottom-10 group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300 text-white">
+                                                <!--popup content-->
+                                                <div
+                                                    class="flex justify-center items-center
                                     space-x-4 h-full">
-                                            <span class="p-2">
-                                                <i class="fas fa-heart"></i>
-                                                412K
-                                            </span>
+                                                    <span class="p-2">
+                                                        <i class="fas fa-heart"></i>
+                                                        412K
+                                                    </span>
 
-                                            <span class="p-2">
-                                                <i class="fas fa-comment"></i>
-                                                2,909
-                                            </span>
+                                                    <span class="p-2">
+                                                        <i class="fas fa-comment"></i>
+                                                        2,909
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                </article>
+                                    </div>
+                                </section-post>
+
                             </a>
+                            {{-- post end --}}
                         </div>
+                        <div class="w-1/3 p-px md:px-3">
+                            {{-- post start --}}
+                            <a href="#">
+                                <section-post>
+                                    <!-- Card -->
+                                    <div class=" group">
+                                        <div class="relative overflow-hidden">
+                                            <img class=" w-full object-cover"
+                                                src="https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80"
+                                                alt="">
+                                            <div
+                                                class="absolute h-full w-full bg-black/20 flex items-center justify-center -bottom-10 group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300 text-white">
+                                                <!--popup content-->
+                                                <div
+                                                    class="flex justify-center items-center
+                                    space-x-4 h-full">
+                                                    <span class="p-2">
+                                                        <i class="fas fa-heart"></i>
+                                                        412K
+                                                    </span>
+
+                                                    <span class="p-2">
+                                                        <i class="fas fa-comment"></i>
+                                                        2,909
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </section-post>
+
+                            </a>
+                            {{-- post end --}}
+                        </div>
+                        <div class="w-1/3 p-px md:px-3">
+                            {{-- post start --}}
+                            <a href="#">
+                                <section-post>
+                                    <!-- Card -->
+                                    <div class=" group">
+                                        <div class="relative overflow-hidden">
+                                            <img class=" w-full object-cover"
+                                                src="https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80"
+                                                alt="">
+                                            <div
+                                                class="absolute h-full w-full bg-black/20 flex items-center justify-center -bottom-10 group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300 text-white">
+                                                <!--popup content-->
+                                                <div
+                                                    class="flex justify-center items-center
+                                    space-x-4 h-full">
+                                                    <span class="p-2">
+                                                        <i class="fas fa-heart"></i>
+                                                        412K
+                                                    </span>
+
+                                                    <span class="p-2">
+                                                        <i class="fas fa-comment"></i>
+                                                        2,909
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </section-post>
+
+                            </a>
+                            {{-- post end --}}
+                        </div>
+                        <div class="w-1/3 p-px md:px-3">
+                            {{-- post start --}}
+                            <a href="#">
+                                <section-post>
+                                    <!-- Card -->
+                                    <div class=" group">
+                                        <div class="relative overflow-hidden">
+                                            <img class=" w-full object-cover"
+                                                src="https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80"
+                                                alt="">
+                                            <div
+                                                class="absolute h-full w-full bg-black/20 flex items-center justify-center -bottom-10 group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300 text-white">
+                                                <!--popup content-->
+                                                <div
+                                                    class="flex justify-center items-center
+                                    space-x-4 h-full">
+                                                    <span class="p-2">
+                                                        <i class="fas fa-heart"></i>
+                                                        412K
+                                                    </span>
+
+                                                    <span class="p-2">
+                                                        <i class="fas fa-comment"></i>
+                                                        2,909
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </section-post>
+
+                            </a>
+                            {{-- post end --}}
+                        </div>
+
                     </div>
                 </div>
             </div>

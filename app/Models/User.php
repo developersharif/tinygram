@@ -49,4 +49,8 @@ class User extends Authenticatable
     public static function getByUsername($username){
         return static::where('username', $username)->first();
     }
+
+    public function likedPosts(){
+        return $this->belongsToMany(Post::class,'post_likes')->withTimestamps();
+    }
 }

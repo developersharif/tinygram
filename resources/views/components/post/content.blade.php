@@ -9,13 +9,13 @@
                                     class="rounded-md shadow-md sm:w-96 bg-coolGray-900 text-coolGray-100 hover:shadow-none hover:bg-gray-50">
                                     <div class="flex items-center justify-between p-3">
                                         <div class="flex items-center space-x-2">
-                                            <a href="{{ route('user.profile', $post->user->id) }}">
+                                            <a href="{{ route('user.profile', $post->user->username) }}">
                                                 <img src="{{ asset('storage/profile/' . $post->user->avatar) }}"
                                                     alt=""
                                                     class="object-cover object-center w-8 h-8 rounded-full shadow-sm bg-coolGray-500 border-coolGray-700" />
                                             </a>
                                             <div class="-space-y-1 cursor-pointer">
-                                                <a href="{{ route('user.profile', $post->user->id) }}">
+                                                <a href="{{ route('user.profile', $post->user->username) }}">
                                                     <h2 class="text-sm font-semibold leading-none">
                                                         {{ $post->user->name }}</h2>
                                                 </a>

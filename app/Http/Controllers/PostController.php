@@ -15,7 +15,13 @@ class PostController extends Controller
     public function index()
     {
         $suggested_user = User::all();
-        $posts = Post::with('user')->where('status',1)->orderBy('id','desc')->get();
+        $posts = Post::with('user')
+        ->where('status', 1)
+        ->whereHas('user', function ($query) {
+            $query->where('status', 1);
+        })
+        ->orderBy('id', 'desc')
+        ->get();
         return view('home',['posts' => $posts,'suggested_users' => $suggested_user]);
     }
 

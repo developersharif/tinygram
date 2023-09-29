@@ -22,7 +22,7 @@ class PostFactory extends Factory
         return [
             'user_id'=>fake()->numberBetween(1,User::count()),
             'body'=>fake()->text(),
-            'image'=>fake()->randomElement(['one.png','two.png','three.png']),
+            'image'=>fake()->randomElement(['one.jpeg','two.jpeg','three.jpeg']),
             'comment_status'=>fake()->numberBetween(0,1),
         ];
     }

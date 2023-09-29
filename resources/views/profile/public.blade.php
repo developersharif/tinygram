@@ -1,7 +1,7 @@
 <x-post.layout>
     <x-slot:content>
         {{-- profile content start --}}
-        <main class="">
+        <main class="bg-white">
 
             <div class="">
 
@@ -113,7 +113,7 @@
                                         <!-- Card -->
                                         <div class=" group">
                                             <div class="relative overflow-hidden">
-                                                <img class="h-72 w-full object-cover object-center"
+                                                <img class="h-64 w-full object-cover object-center"
                                                     src="{{ asset('storage/photos/' . $post->image) }}">
                                                 <div
                                                     class="absolute h-full w-full bg-black/20 flex items-center justify-center -bottom-10 group-hover:bottom-0 opacity-0 group-hover:opacity-100 transition-all duration-300 text-white">

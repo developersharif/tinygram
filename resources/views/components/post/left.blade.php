@@ -1,4 +1,4 @@
-<div class="container mx-auto grid grid-flow-col gap-1 mb-2">
+<div class="container mx-auto grid grid-flow-col gap-1 mb-2 md:w-[85%]">
     <section-left class="p-4  hidden sm:block">
         <!-- Column 1 Content -->
         <div class="sm:w-60 min-h-screen w-14 pt-2 transition-all md:sticky md:top-0 ">
@@ -16,12 +16,14 @@
                             Home</span></a>
                 </li>
                 <li
-                    class="hover:bg-gray-200 hover:text-gray-800 cursor-pointer sm:justify-start px-4 h-12 flex items-center justify-center">
+                    class="hover:bg-gray-200 hover:text-gray-800 cursor-pointer sm:justify-start px-4 h-12 flex items-center justify-center relative">
                     <i class="fa-regular fa-bell"></i>
-                    <span class="ml-3 hidden sm:block  font-semibold tracking-wide ">
-                        Notification</span>
-                    <sup class="badge badge-error text-white text-xs">+4</sup>
+                    <sup class="badge bg-red-600  text-white scale-75 absolute top-1 left-4">4</sup>
+                    <span class="ml-3 hidden sm:block font-semibold tracking-wide">
+                        Notification
+                    </span>
                 </li>
+
                 <li class="hover:bg-gray-200 hover:text-gray-800 cursor-pointer sm:justify-start px-4 h-12 flex items-center justify-center"
                     onclick="searchModal.showModal()">
                     <i class="fa-solid fa-magnifying-glass"></i>

@@ -72,26 +72,34 @@
                                                 <i class="fa-regular fa-bookmark"></i>
                                             </button>
                                         </div>
-                                        <div class="flex flex-wrap items-center pt-3 pb-1" style="cursor: auto;">
-                                            <div class="flex items-center space-x-2">
-                                                <div class="flex -space-x-1">
-                                                    <img alt=""
-                                                        class="w-5 h-5 border rounded-full bg-coolGray-500 border-coolGray-800"
-                                                        src="{{ asset('storage/profile/' . $post->user->avatar) }}">
-                                                    <img alt=""
-                                                        class="w-5 h-5 border rounded-full bg-coolGray-500 border-coolGray-800"
-                                                        src="https://stackdiary.com/140x100.png">
-                                                    <img alt=""
-                                                        class="w-5 h-5 border rounded-full bg-coolGray-500 border-coolGray-800"
-                                                        src="{{ asset('storage/profile/' . $post->user->avatar) }}"><!---->
+                                        @if ($post->likedBy()->count() != 0)
+                                            <div class="flex flex-wrap items-center pt-3 pb-1" style="cursor: auto;">
+                                                <div class="flex items-center space-x-2">
+                                                    <div class="flex -space-x-1">
+                                                        @foreach ($post->likedBy()->limit(3)->orderByDesc('id')->get() as $likedUser)
+                                                            <a href="{{ route('user.profile', $likedUser->username) }}">
+                                                                <img alt=""
+                                                                    class="w-5 h-5 border rounded-full bg-coolGray-500 border-coolGray-800"
+                                                                    src="{{ asset('storage/profile/' . $likedUser->avatar) }}"></a>
+                                                        @endforeach
+
+
+
+                                                    </div>
+                                                    <span class="text-sm"> Liked by
+                                                        <span
+                                                            class="font-semibold">{{ $post->likedBy()->orderByDesc('id')->first()->name }}</span>
+                                                        @if ($post->likedBy()->count() > 1)
+                                                            and
+                                                            <span
+                                                                class="font-semibold">{{ $post->likedBy()->count() - 1 }}
+                                                                others</span>
+                                                        @endif
+
+                                                    </span>
                                                 </div>
-                                                <span class="text-sm"> Liked by
-                                                    <span class="font-semibold">sharif</span> and
-                                                    <span class="font-semibold">{{ $post->likedBy()->count() }}
-                                                        others</span>
-                                                </span>
                                             </div>
-                                        </div>
+                                        @endif
                                         <div class="space-y-3" style="cursor: auto;">
                                             <p class="text-sm" style="cursor: auto;">
                                                 <span class="text-base font-semibold">{{ $post->user->name }}</span>

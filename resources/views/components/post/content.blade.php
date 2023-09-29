@@ -55,7 +55,8 @@
                                             <div class="flex items-center space-x-3">
                                                 <button type="button" title="Like post"
                                                     class="flex items-center justify-center">
-                                                    <i class="fa-regular fa-heart"></i>
+                                                    <x-like-button :post="$post" />
+
                                                 </button>
                                                 <button type="button" title="Add a comment"
                                                     class="flex items-center justify-center">
@@ -86,7 +87,8 @@
                                                 </div>
                                                 <span class="text-sm"> Liked by
                                                     <span class="font-semibold">sharif</span> and
-                                                    <span class="font-semibold">20 others</span>
+                                                    <span class="font-semibold">{{ $post->likedBy()->count() }}
+                                                        others</span>
                                                 </span>
                                             </div>
                                         </div>

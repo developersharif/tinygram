@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicProfileController;
@@ -27,7 +28,10 @@ Route::resource('/post', PostController::class)->names([
     'update' => 'post.update',
     'destroy' => 'post.destroy',
 ])->middleware('auth');
-
+Route::prefix('like')->group(function () {
+    Route::get('/{post_id}',[LikeController::class,'like'])->name('post.like');
+    Route::post('/{post_id}',[LikeController::class,'unlike'])->name('post.unlike');
+})->middleware('auth');
 Route::get("/@{username}",[PublicProfileController::class,'show'])->name('user.profile');
 
 Route::get('/dashboard', function () {

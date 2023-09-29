@@ -13,7 +13,11 @@ class Post extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
-
+    public function likedByUser($userId = null)
+    {
+        $userId = $userId ?? auth()->id();
+        return $this->likedBy()->where('user_id', $userId)->exists();
+    }
     public function likedBy(){
         return $this->belongsToMany(User::class,'post_likes')->withTimestamps();
     }

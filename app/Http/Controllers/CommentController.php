@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Comment;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -29,9 +30,27 @@ class CommentController extends Controller
      */
     public function store(StoreCommentRequest $request)
     {
-        //
+        Comment::create([
+            'user_id' => Auth::user()->id,
+            'post_id' => $request->input('post_id'),
+            'content' => $request->input('content'),
+        ]);
+
+        return back();
     }
 
+
+    public function reply(StoreCommentRequest $request)
+    {
+        Comment::create([
+            'user_id' => Auth::user()->id,
+            'post_id' => $request->input('post_id'),
+            'parent_comment_id' => $request->input('parent_comment_id'),
+            'content' => $request->input('content'),
+        ]);
+
+        return back();
+    }
     /**
      * Display the specified resource.
      */
@@ -61,6 +80,7 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        $comment->delete();
+        return back();
     }
 }

@@ -11,25 +11,25 @@ class CommentPolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
-    {
-        //
-    }
+    // public function viewAny(User $user): bool
+    // {
+    //     //
+    // }
 
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, Comment $comment): bool
-    {
-        //
-    }
+    // /**
+    //  * Determine whether the user can view the model.
+    //  */
+    // public function view(User $user, Comment $comment): bool
+    // {
+    //     //
+    // }
 
     /**
      * Determine whether the user can create models.
      */
     public function create(User $user): bool
     {
-        //
+        return $user->status == 1;
     }
 
     /**
@@ -37,7 +37,7 @@ class CommentPolicy
      */
     public function update(User $user, Comment $comment): bool
     {
-        //
+        return $user->id === $comment->user_id;
     }
 
     /**
@@ -45,22 +45,22 @@ class CommentPolicy
      */
     public function delete(User $user, Comment $comment): bool
     {
-        //
+       return $this->update($user,$comment);
     }
 
     /**
      * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Comment $comment): bool
-    {
-        //
-    }
+    //  */
+    // public function restore(User $user, Comment $comment): bool
+    // {
+    //     //
+    // }
 
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Comment $comment): bool
-    {
-        //
-    }
+    // /**
+    //  * Determine whether the user can permanently delete the model.
+    //  */
+    // public function forceDelete(User $user, Comment $comment): bool
+    // {
+    //     //
+    // }
 }

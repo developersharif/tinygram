@@ -47,9 +47,9 @@
                                             </details>
                                         @endcan
                                     </div>
-                                    <img src="{{ asset('storage/photos/' . $post->image) }}"
-                                        class="object-cover object-center block h-auto w-full  bg-coolGray-500"
-                                        style="cursor: auto;">
+                                    <a href="{{ route('post.show', $post->id) }}"> <img
+                                            src="{{ asset('storage/photos/' . $post->image) }}"
+                                            class="object-cover object-center block h-auto w-full  bg-coolGray-500"></a>
                                     <div class="p-3" style="cursor: auto;">
                                         <div class="flex items-center justify-between" style="cursor: auto;">
                                             <div class="flex items-center space-x-3">
@@ -103,15 +103,18 @@
                                                 </div>
                                             </div>
                                         @endif
-                                        <div class="space-y-3" style="cursor: auto;">
-                                            <p class="text-sm" style="cursor: auto;">
-                                                <span class="text-base font-semibold">{{ $post->user->name }}</span>
-                                                {{ $post->body }}
-                                            </p>
-                                            {{-- <input type="text" placeholder="Add a comment..."
+                                        <a href="{{ route('post.show', $post->id) }}">
+                                            <div class="space-y-3">
+                                                <p class="text-sm">
+                                                    <span
+                                                        class="text-base font-semibold">{{ $post->user->name }}</span>
+                                                    {{ Illuminate\Support\Str::limit($post->body, 20, '...') }}
+                                                </p>
+                                                {{-- <input type="text" placeholder="Add a comment..."
                                                 class="w-full py-0.5 bg-transparent border-none rounded text-sm pl-0 text-coolGray-100"
                                                 style="cursor: auto;"> --}}
-                                        </div>
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
                             </custom-card>

@@ -18,7 +18,7 @@
                     <div class="w-8/12 md:w-7/12 ml-4">
                         <div class="md:flex md:flex-wrap md:items-center mb-4">
                             <h2 class="text-base inline-block font-light md:mr-2 mb-2 sm:mb-0">
-                                {{ $user->name }}
+                                {{ $user->username }}
                             </h2>
 
                             <!-- badge -->

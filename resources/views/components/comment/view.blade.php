@@ -1,7 +1,7 @@
 <div class="comment-thread">
     @foreach ($comments as $comment)
         <!-- Comment 1 start -->
-        <details open class="comment" id="comment-1">
+        <details open class="comment" id="comment-{{ $comment->id }}">
             <a href="#comment-1" class="comment-border-link">
                 <span class="sr-only">Jump to comment-1</span>
             </a>
@@ -18,13 +18,20 @@
                         </button>
                     </div>
                     <div class="comment-info">
-                        <a href="{{ route('user.profile', $comment->user->username) }}"
-                            class="comment-author">{{ $comment->user->name }}</a>
-                        <p class="m-0">
-                            {{ $comment->updated_at->diffForHumans() }}
-                        </p>
+                        <form action="{{ route('comment.destroy', $comment->id) }}" method="post">
+                            <a href="{{ route('user.profile', $comment->user->username) }}"
+                                class="comment-author">{{ $comment->user->name }} </a> &bull;
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="text-[12px] underline">Delete</button>
+
+                            <p class="m-0">
+                                {{ $comment->updated_at->diffForHumans() }}
+                            </p>
+                        </form>
                     </div>
                 </div>
+
             </summary>
 
             <div class="comment-body">
@@ -41,8 +48,8 @@
                     <input type="hidden" name="post_id" value="{{ $comment->post_id }}">
                     <textarea name="content" placeholder="Reply to comment" rows="4"></textarea>
                     <button type="submit" class="btn btn-xs">Submit</button>
-                    <button type="button" data-toggle="reply-form" data-target="comment-{{ $comment->id }}-reply-form"
-                        class="btn btn-xs">Cancel</button>
+                    <button type="button" data-toggle="reply-form"
+                        data-target="comment-{{ $comment->id }}-reply-form" class="btn btn-xs">Cancel</button>
                 </form>
                 <!-- Reply form end -->
             </div>

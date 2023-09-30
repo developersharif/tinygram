@@ -5,6 +5,7 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicProfileController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,6 +43,7 @@ Route::middleware('auth')->group(function(){
     ]);
     Route::post("/comment/reply/{comment_id}", [CommentController::class,'reply'])->name("comment.reply");
 });
+Route::get("/search",[SearchController::class,'search'])->name("search");
 Route::prefix('like')->group(function () {
     Route::get('/{post_id}',[LikeController::class,'like'])->name('post.like');
     Route::post('/{post_id}',[LikeController::class,'unlike'])->name('post.unlike');

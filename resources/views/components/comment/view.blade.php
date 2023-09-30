@@ -20,10 +20,12 @@
                     <div class="comment-info">
                         <form action="{{ route('comment.destroy', $comment->id) }}" method="post">
                             <a href="{{ route('user.profile', $comment->user->username) }}"
-                                class="comment-author">{{ $comment->user->name }} </a> &bull;
+                                class="comment-author">{{ $comment->user->name }} </a>
                             @method('DELETE')
                             @csrf
-                            <button type="submit" class="text-[12px] underline">Delete</button>
+                            @can('delete', $comment)
+                                &bull; <button type="submit" class="text-[12px] underline">Delete</button>
+                            @endcan
 
                             <p class="m-0">
                                 {{ $comment->updated_at->diffForHumans() }}

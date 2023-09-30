@@ -62,12 +62,9 @@
                                                     class="flex items-center justify-center">
                                                     <a href="{{ route('post.show', $post->id) }}"><i
                                                             class="fa-regular fa-comment"></i><span
-                                                            class="p-1 text-sm">{{ $post->comments()->count() }}</span></a>
+                                                            class="p-1 text-sm">{{ $post->comments()->count() > 0 ? $post->comments()->count() : null }}</span></a>
                                                 </button>
-                                                <button type="button" title="Share post"
-                                                    class="flex items-center justify-center">
-                                                    <i class="fa-solid fa-retweet"></i>
-                                                </button>
+
                                             </div>
                                             <button type="button" title="Bookmark post"
                                                 class="flex items-center justify-center">

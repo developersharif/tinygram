@@ -1,3 +1,6 @@
+@php
+    $likes = $post->likedBy()->count() > 0 ? $post->likedBy()->count() : null;
+@endphp
 <form action="{{ $post->likedByUser() ? route('post.unlike', $post) : route('post.like', $post) }}"
     method="{{ $post->likedByUser() ? 'post' : 'get' }}">
     @csrf
@@ -8,5 +11,6 @@
         @else
             <i class="fa-solid fa-heart" style="color: #f32020;" title="unlike"></i>
         @endif
+        {{ $likes }}
     </button>
 </form>

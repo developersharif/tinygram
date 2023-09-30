@@ -1,7 +1,7 @@
 <x-post.layout>
     <x-slot:content>
         {{-- profile content start --}}
-        <main class="bg-white">
+        <main class="bg-white mb-16">
 
             <div class="">
 

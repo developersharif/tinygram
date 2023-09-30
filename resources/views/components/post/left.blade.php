@@ -32,10 +32,15 @@
                     <dialog id="searchModal" class="modal">
                         <div class="modal-box">
                             <h3 class="font-bold text-lg">Search!</h3>
-                            <p class="py-4"><input type="text" placeholder="Search here"
-                                    class="input input-bordered w-full max-w-xs" />
-                                <span> <button class="btn btn-outline">Search</button> </span>
-                            </p>
+
+                            <form action="{{ route('search') }}" method="get">
+                                <p class="py-4">
+                                    <input type="text" name="q" placeholder="Search..."
+                                        class="input input-bordered w-full max-w-xs" />
+                                    <span> <button type="submit" class="btn btn-outline">Search</button> </span>
+                                </p>
+                            </form>
+
                         </div>
                         <form method="dialog" class="modal-backdrop">
                             <button>close</button>
@@ -130,7 +135,7 @@
                 </a>
             </li>
             <li>
-                <a class="tooltip" data-tip="Search">
+                <a href="{{ route('search') }}" class="tooltip" data-tip="Search">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </a>
             </li>

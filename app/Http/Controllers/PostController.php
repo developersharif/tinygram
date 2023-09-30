@@ -57,7 +57,9 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $post = Post::find($id);
+        $comments = $post->comments()->whereNull('parent_comment_id')->with('childComments')->orderBy('id','desc')->get();
+        return view('post.view',['post' => $post,"comments" => $comments]);
     }
 
     /**

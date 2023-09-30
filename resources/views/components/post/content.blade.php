@@ -60,7 +60,9 @@
                                                 </button>
                                                 <button type="button" title="Add a comment"
                                                     class="flex items-center justify-center">
-                                                    <i class="fa-regular fa-comment"></i>
+                                                    <a href="{{ route('post.show', $post->id) }}"><i
+                                                            class="fa-regular fa-comment"></i><span
+                                                            class="p-1 text-sm">{{ $post->comments()->count() }}</span></a>
                                                 </button>
                                                 <button type="button" title="Share post"
                                                     class="flex items-center justify-center">
@@ -77,7 +79,8 @@
                                                 <div class="flex items-center space-x-2">
                                                     <div class="flex -space-x-1">
                                                         @foreach ($post->likedBy()->limit(3)->orderByDesc('id')->get() as $likedUser)
-                                                            <a href="{{ route('user.profile', $likedUser->username) }}">
+                                                            <a
+                                                                href="{{ route('user.profile', $likedUser->username) }}">
                                                                 <img alt=""
                                                                     class="w-5 h-5 border rounded-full bg-coolGray-500 border-coolGray-800"
                                                                     src="{{ asset('storage/profile/' . $likedUser->avatar) }}"></a>
@@ -105,9 +108,9 @@
                                                 <span class="text-base font-semibold">{{ $post->user->name }}</span>
                                                 {{ $post->body }}
                                             </p>
-                                            <input type="text" placeholder="Add a comment..."
+                                            {{-- <input type="text" placeholder="Add a comment..."
                                                 class="w-full py-0.5 bg-transparent border-none rounded text-sm pl-0 text-coolGray-100"
-                                                style="cursor: auto;">
+                                                style="cursor: auto;"> --}}
                                         </div>
                                     </div>
                                 </div>

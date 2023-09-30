@@ -31,8 +31,8 @@
                 <p>
                     {{ $comment->content }}
                 </p>
-                <button type="button" data-toggle="reply-form"
-                    data-target="comment-{{ $comment->id }}-reply-form">Reply</button>
+                <button type="button" data-toggle="reply-form" data-target="comment-{{ $comment->id }}-reply-form"
+                    class="btn btn-xs">Reply</button>
                 <!-- Reply form start -->
                 <form action="{{ route('comment.reply', $comment->id) }}" method="POST" class="reply-form d-none"
                     id="comment-{{ $comment->id }}-reply-form">
@@ -40,9 +40,9 @@
                     <input type="hidden" name="parent_comment_id" value="{{ $comment->id }}">
                     <input type="hidden" name="post_id" value="{{ $comment->post_id }}">
                     <textarea name="content" placeholder="Reply to comment" rows="4"></textarea>
-                    <button type="submit">Submit</button>
-                    <button type="button" data-toggle="reply-form"
-                        data-target="comment-{{ $comment->id }}-reply-form">Cancel</button>
+                    <button type="submit" class="btn btn-xs">Submit</button>
+                    <button type="button" data-toggle="reply-form" data-target="comment-{{ $comment->id }}-reply-form"
+                        class="btn btn-xs">Cancel</button>
                 </form>
                 <!-- Reply form end -->
             </div>

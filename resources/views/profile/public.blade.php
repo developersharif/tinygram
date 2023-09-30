@@ -108,7 +108,7 @@
                             <!-- column -->
                             <div class="w-1/3 p-px md:px-3">
                                 {{-- post start --}}
-                                <a href="#">
+                                <a href="{{ route('post.show', $post->id) }}">
                                     <section-post>
                                         <!-- Card -->
                                         <div class=" group">
@@ -123,12 +123,12 @@
                                     space-x-4 h-full">
                                                         <span class="p-2">
                                                             <i class="fas fa-heart"></i>
-                                                            412K
+                                                            {{ $post->likedBy()->count() }}
                                                         </span>
 
                                                         <span class="p-2">
                                                             <i class="fas fa-comment"></i>
-                                                            2,909
+                                                            {{ $post->comments()->count() }}
                                                         </span>
                                                     </div>
                                                 </div>

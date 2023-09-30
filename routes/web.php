@@ -29,15 +29,19 @@ Route::resource('/post', PostController::class)->names([
     'update' => 'post.update',
     'destroy' => 'post.destroy',
 ])->middleware('auth');
-Route::resource("/comment", CommentController::class)->names([
-    'create' => 'comment.create',
-    'store' => 'comment.store',
-    'index' => 'comment.index',
-    'show' => 'comment.show',
-    'edit' => 'comment.edit',
-    'update' => 'comment.update',
-    'destroy' => 'comment.destroy',
-])->middleware('auth');
+
+Route::middleware('auth')->group(function(){
+    Route::resource("/comment", CommentController::class)->names([
+        'create' => 'comment.create',
+        'store' => 'comment.store',
+        'index' => 'comment.index',
+        'show' => 'comment.show',
+        'edit' => 'comment.edit',
+        'update' => 'comment.update',
+        'destroy' => 'comment.destroy',
+    ]);
+    Route::post("/comment/reply/{comment_id}", [CommentController::class,'reply'])->name("comment.reply");
+});
 Route::prefix('like')->group(function () {
     Route::get('/{post_id}',[LikeController::class,'like'])->name('post.like');
     Route::post('/{post_id}',[LikeController::class,'unlike'])->name('post.unlike');

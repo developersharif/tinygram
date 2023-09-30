@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -27,6 +28,15 @@ Route::resource('/post', PostController::class)->names([
     'edit' => 'post.edit',
     'update' => 'post.update',
     'destroy' => 'post.destroy',
+])->middleware('auth');
+Route::resource("/comment", CommentController::class)->names([
+    'create' => 'comment.create',
+    'store' => 'comment.store',
+    'index' => 'comment.index',
+    'show' => 'comment.show',
+    'edit' => 'comment.edit',
+    'update' => 'comment.update',
+    'destroy' => 'comment.destroy',
 ])->middleware('auth');
 Route::prefix('like')->group(function () {
     Route::get('/{post_id}',[LikeController::class,'like'])->name('post.like');

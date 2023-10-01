@@ -20,25 +20,23 @@ class FollowerController extends Controller
 
     public function following($username)
 {
-    $user = User::getByUsername($username);
+    $user = User::where('username',$username)->where('status', 1)->first();
     if (!$user) {
         return response()->json(['error' => 'User not found'], 404);
     }
     $following = $user->followings;
 
-    return response()->json(['following' => $following]);
+    return view("profile.follow",['user' => $user, 'following' => $following]);
 }
 public function follower($username)
 {
-    $user = User::getByUsername($username);
-
+    $user = User::where('username',$username)->where('status', 1)->first();
     if (!$user) {
         return response()->json(['error' => 'User not found'], 404);
     }
-
     $followers = $user->followers;
 
-    return response()->json(['followers' => $followers]);
+    return view("profile.follow",['user' => $user, 'followers' => $followers]);
 }
 
 }

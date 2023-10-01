@@ -86,12 +86,16 @@
                         </li>
 
                         <li>
-                            <span class="font-semibold text-gray-800 block">40.5k</span>
-                            followers
+                            <a href="{{ route('user.follower', $user->username) }}">
+                                <span class="font-semibold">{{ $user->followers->count() }}</span>
+                                followers
+                            </a>
                         </li>
                         <li>
-                            <span class="font-semibold text-gray-800 block">302</span>
-                            following
+                            <a href="{{ route('user.following', $user->username) }}">
+                                <span class="font-semibold">{{ $user->followings->count() }}</span>
+                                following
+                            </a>
                         </li>
                     </ul>
 

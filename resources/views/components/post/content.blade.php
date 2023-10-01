@@ -1,3 +1,16 @@
+        @php
+            $easyFormat = function ($n) {
+                if ($n < 1000) {
+                    return $n;
+                }
+            
+                $suffix = ['', 'k', 'M', 'B', 'T', 'Q'];
+            
+                $power = min(floor(log($n, 1000)), count($suffix) - 1);
+            
+                return round($n / 1000 ** $power, 2) . $suffix[$power];
+            };
+        @endphp
         <section-middle class="container bg-white mb-10">
             @foreach ($posts as $post)
                 <!--Post Card Start-->
@@ -62,7 +75,7 @@
                                                     class="flex items-center justify-center">
                                                     <a href="{{ route('post.show', $post->id) }}"><i
                                                             class="fa-regular fa-comment"></i><span
-                                                            class="p-1 text-sm">{{ $post->comments()->count() > 0 ? $post->comments()->count() : null }}</span></a>
+                                                            class="p-1 text-sm">{{ $post->comments()->count() > 0 ? $easyFormat($post->comments()->count()) : null }}</span></a>
                                                 </button>
 
                                             </div>

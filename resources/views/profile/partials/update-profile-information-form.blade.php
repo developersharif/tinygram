@@ -26,42 +26,53 @@
 
         <div>
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full"
-                :value="old('email', $user->email)" required autocomplete="username" />
+            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)"
+                required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
-            <div>
-                <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
-                    {{ __('Your email address is unverified.') }}
+                <div>
+                    <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
+                        {{ __('Your email address is unverified.') }}
 
-                    <button form="send-verification"
-                        class="underline text-sm   hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                        {{ __('Click here to re-send the verification email.') }}
-                    </button>
-                </p>
+                        <button form="send-verification"
+                            class="underline text-sm   hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
+                            {{ __('Click here to re-send the verification email.') }}
+                        </button>
+                    </p>
 
-                @if (session('status') === 'verification-link-sent')
-                <p class="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
-                    {{ __('A new verification link has been sent to your email address.') }}
-                </p>
-                @endif
-            </div>
+                    @if (session('status') === 'verification-link-sent')
+                        <p class="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
+                            {{ __('A new verification link has been sent to your email address.') }}
+                        </p>
+                    @endif
+                </div>
             @endif
         </div>
+
         <div>
-            <x-input-label for="avatar" :value="__('Avatar')" />
-            <x-text-input id="avatar" name="avatar" type="file" class="mt-1 block w-full" />
-            <x-input-error class="mt-2" :messages="$errors->get('avatar')" />
+            <label class="block text-sm font-medium text-gray-700">
+                Avatar
+            </label>
+            <div class="mt-1 flex items-center">
+                <span class="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
+                    <img src="{{ asset('storage/profile/' . auth()->user()->avatar) }}" />
+                </span>
+                <label for="avatar" class="cursor-pointer">
+                    <span class="border border-gray-300 p-2 rounded-md">Change</span>
+                    <x-text-input id="avatar" name="avatar" type="file" class="mt-1 w-full hidden" />
+                </label>
+                <x-input-error class="mt-2" :messages="$errors->get('avatar')" />
+            </div>
         </div>
+
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
-            <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
-                class="text-sm  ">
-                {{ __('Saved.') }}</p>
+                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm  ">
+                    {{ __('Saved.') }}</p>
             @endif
         </div>
     </form>

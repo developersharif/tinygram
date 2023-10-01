@@ -1,7 +1,5 @@
 <x-post.layout>
     <x-slot:content>
-        {{-- <x-post.content :$posts /> --}}
-        <!-- You can open the modal using ID.showModal() method -->
         <div x-data="{ image: '{{ asset('storage/photos/' . $post->image) }}' }">
             <form action="{{ route('post.update', $post) }}" method="post" enctype="multipart/form-data"
                 class="form-control">

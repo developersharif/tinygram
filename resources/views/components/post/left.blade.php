@@ -140,7 +140,7 @@
                 </a>
             </li>
             <li>
-                <a class="tooltip" data-tip="Create Post">
+                <a class="tooltip" data-tip="Create Post" href="{{ route('post.create') }}">
                     <i class="fa-regular fa-square-plus"></i>
                 </a>
             </li>

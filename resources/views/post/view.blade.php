@@ -223,9 +223,6 @@
                                                 class="fa-regular fa-comment"></i><span
                                                 class="p-1 text-sm">{{ $post->comments()->count() }}</span></a>
                                     </button>
-                                    <button type="button" title="Share post" class="flex items-center justify-center">
-                                        <i class="fa-solid fa-retweet"></i>
-                                    </button>
                                 </div>
                                 <button type="button" title="Bookmark post" class="flex items-center justify-center">
                                     <i class="fa-regular fa-bookmark"></i>

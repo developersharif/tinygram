@@ -25,7 +25,8 @@
                                             <a href="{{ route('user.profile', $post->user->username) }}">
                                                 <img src="{{ asset('storage/profile/' . $post->user->avatar) }}"
                                                     alt=""
-                                                    class="object-cover object-center w-8 h-8 rounded-full shadow-sm bg-coolGray-500 border-coolGray-700" />
+                                                    class="object-cover object-center w-8 h-8 rounded-full shadow-sm bg-coolGray-500 border-coolGray-700"
+                                                    loading="lazy" />
                                             </a>
                                             <div class="-space-y-1 cursor-pointer">
                                                 <a href="{{ route('user.profile', $post->user->username) }}">
@@ -62,7 +63,8 @@
                                     </div>
                                     <a href="{{ route('post.show', $post->id) }}"> <img
                                             src="{{ asset('storage/photos/' . $post->image) }}"
-                                            class="object-cover object-center block h-auto w-full  bg-coolGray-500"></a>
+                                            class="object-cover object-center block h-auto w-full  bg-coolGray-500"
+                                            loading="lazy"></a>
                                     <div class="p-3" style="cursor: auto;">
                                         <div class="flex items-center justify-between" style="cursor: auto;">
                                             <div class="flex items-center space-x-3">

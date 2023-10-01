@@ -25,7 +25,7 @@ class StorePostRequest extends FormRequest
     {
         $rules = [
             'body' => 'max:255',
-            'photo' => ['image', 'mimes:jpeg,png,jpg,gif,webp', 'max:3072'],
+            'photo' => ['image', 'mimes:jpeg,png,jpg,gif,webp', 'max:5120'],
         ];
 
         if ($this->isMethod('post')) {

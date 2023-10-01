@@ -20,17 +20,20 @@
                             <h2 class="text-base inline-block font-light md:mr-2 mb-2 sm:mb-0">
                                 {{ $user->username }}
                             </h2>
-
                             <!-- badge -->
-
-                            <i class="fa-solid fa-circle-check scale-90"></i>
-
-
+                            {{-- <i class="fa-solid fa-circle-check scale-90"></i> --}}
                             <!-- follow button -->
-                            <a href="#"
-                                class="bg-gray-800 px-2 py-1
-                        text-white font-semibold text-sm rounded  text-center
-                        sm:inline-block ml-1">Follow</a>
+                            @if (auth()->user() != $user)
+                                <form action="{{ route('user.follow', $user->id) }}" method="post">
+                                    @csrf
+                                    <input type="submit"
+                                        value="{{ auth()->user()->isFollowing($user)? 'Unfollow': 'Follow' }}"
+                                        class="bg-gray-800 px-2 py-1
+                            text-white font-semibold text-sm rounded  text-center
+                            sm:inline-block ml-1">
+                                </form>
+                            @endif
+
                         </div>
 
                         <!-- post, following, followers list for medium screens -->
@@ -41,12 +44,16 @@
                             </li>
 
                             <li>
-                                <span class="font-semibold">40.5k</span>
-                                followers
+                                <a href="{{ route('user.follower', $user->username) }}">
+                                    <span class="font-semibold">{{ $user->followers->count() }}</span>
+                                    followers
+                                </a>
                             </li>
                             <li>
-                                <span class="font-semibold">302</span>
-                                following
+                                <a href="{{ route('user.following', $user->username) }}">
+                                    <span class="font-semibold">{{ $user->followings->count() }}</span>
+                                    following
+                                </a>
                             </li>
                         </ul>
 

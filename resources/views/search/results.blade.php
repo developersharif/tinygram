@@ -1,6 +1,6 @@
 <x-post.layout>
-    <x-slot:content>
-        <div class="container bg-white md:m-4 md:pl-4 w-full">
+    <x-slot:content :posts="$posts">
+        <div class="container bg-white md:m-4 md:pl-4 w-full mb-10">
             <form action="{{ route('search') }}" method="get">
                 <p class="py-4">
                     <input type="text" name="q" placeholder="Search..." class="input input-bordered  md:max-w-xs"
@@ -25,6 +25,9 @@
                     </li>
                 @endforeach
             </ul>
+            <small class="text-gray-500">Post Found: {{ $totalFound }}</small>
+            <x-post.content :posts="$posts" />
         </div>
+
     </x-slot:content>
 </x-post.layout>

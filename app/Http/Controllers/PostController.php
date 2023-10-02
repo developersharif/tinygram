@@ -14,16 +14,17 @@ class PostController extends Controller
      */
     public function index()
     {
-        $suggested_user = User::all();
-        $posts = Post::with('user')
-        ->with("likedBy")
-        ->where('status', 1)
-        ->whereHas('user', function ($query) {
-            $query->where('status', 1);
-        })
-        ->orderBy('id', 'desc')
-        ->get();
-        return view('home',['posts' => $posts,'suggested_users' => $suggested_user]);
+        $user = auth()->user();
+        // $posts = Post::with('user')
+        // ->with("likedBy")
+        // ->where('status', 1)
+        // ->whereHas('user', function ($query) {
+        //     $query->where('status', 1);
+        // })
+        // ->orderBy('id', 'desc')
+        // ->get();
+        $posts = $user->followingPosts();
+        return view('home',['posts' => $posts]);
     }
 
     /**

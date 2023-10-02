@@ -82,8 +82,17 @@ class User extends Authenticatable
             ->withTimestamps();
     }
     public function isFollowing(User $user)
+    {
+        return $this->followings->contains($user);
+    }
+    public function followingPosts()
 {
-    return $this->followings->contains($user);
+
+    $following_ids = $this->followings()->pluck('users.id');
+
+    $posts = Post::whereIn('user_id', $following_ids)->orderBy('id','desc')->get();
+
+    return $posts;
 }
 
 }

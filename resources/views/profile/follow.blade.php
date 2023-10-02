@@ -27,7 +27,7 @@
                             <!-- badge -->
                             {{-- <i class="fa-solid fa-circle-check scale-90"></i> --}}
                             <!-- follow button -->
-                            @if (auth()->user() != $user)
+                            @if (auth()->user()->id != $user->id)
                                 <form action="{{ route('user.follow', $user->id) }}" method="post">
                                     @csrf
                                     <input type="submit"
@@ -37,7 +37,12 @@
                             sm:inline-block ml-1">
                                 </form>
                             @endif
-
+                            @if (auth()->user()->id == $user->id)
+                                <a href="{{ route('profile.edit') }}"
+                                    class="bg-gray-800 px-2 py-1
+                            text-white font-semibold text-sm rounded  text-center
+                            sm:inline-block ml-1 cursor-pointer">Edit</a>
+                            @endif
                         </div>
 
                         <!-- post, following, followers list for medium screens -->

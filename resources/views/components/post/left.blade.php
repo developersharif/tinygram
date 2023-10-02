@@ -109,7 +109,7 @@
                     class="hover:bg-gray-200 hover:text-gray-800 cursor-pointer sm:justify-start px-4 h-12 flex items-center justify-center">
 
                     <i class="fa-regular fa-user"></i>
-                    <a href="{{ route('profile.edit') }}"> <span
+                    <a href="{{ route('user.profile', auth()->user()->username) }}"> <span
                             class="ml-3 hidden sm:block font-semibold tracking-wide ">
                             Profile</span> </a>
 
@@ -150,7 +150,7 @@
                 </a>
             </li>
             <li>
-                <a class="tooltip" data-tip="Menu" href="{{ route('profile.edit') }}">
+                <a class="tooltip" data-tip="Menu" href="{{ route('user.profile', auth()->user()->username) }}">
                     <i class="fa-solid fa-bars-staggered"></i>
                 </a>
             </li>

@@ -55,9 +55,11 @@
                 Avatar
             </label>
             <div class="mt-1 flex items-center">
-                <span class="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                    <img src="{{ asset('storage/profile/' . auth()->user()->avatar) }}" />
-                </span>
+                <a href="{{ route('user.profile', auth()->user()->username) }}">
+                    <span class="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
+                        <img src="{{ asset('storage/profile/' . auth()->user()->avatar) }}" />
+                    </span>
+                </a>
                 <label for="avatar" class="cursor-pointer">
                     <span class="border border-gray-300 p-2 rounded-md">Change</span>
                     <x-text-input id="avatar" name="avatar" type="file" class="mt-1 w-full hidden" />

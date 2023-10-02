@@ -33,7 +33,12 @@
                             sm:inline-block ml-1 cursor-pointer">
                                 </form>
                             @endif
-
+                            @if (auth()->user()->id == $user->id)
+                                <a href="{{ route('profile.edit') }}"
+                                    class="bg-gray-800 px-2 py-1
+                            text-white font-semibold text-sm rounded  text-center
+                            sm:inline-block ml-1 cursor-pointer">Edit</a>
+                            @endif
                         </div>
 
                         <!-- post, following, followers list for medium screens -->

@@ -43,8 +43,10 @@
                         <!-- post, following, followers list for medium screens -->
                         <ul class="hidden md:flex space-x-8 mb-4">
                             <li>
-                                <span class="font-semibold">{{ $user->posts()->count() }}</span>
-                                posts
+                                <a href="{{ route('user.profile', $user->username) }}">
+                                    <span class="font-semibold">{{ $user->posts()->count() }}</span>
+                                    posts
+                                </a>
                             </li>
 
                             <li>
@@ -85,8 +87,10 @@
                         class="flex md:hidden justify-around space-x-8 border-t
                 text-center p-2 text-gray-600 leading-snug text-sm">
                         <li>
-                            <span class="font-semibold text-gray-800 block">{{ $user->posts()->count() }}</span>
-                            posts
+                            <a href="{{ route('user.profile', $user->username) }}">
+                                <span class="font-semibold">{{ $user->posts()->count() }}</span>
+                                posts
+                            </a>
                         </li>
 
                         <li>

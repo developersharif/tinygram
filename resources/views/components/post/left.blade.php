@@ -47,12 +47,12 @@
                         </form>
                     </dialog>
                 </li>
-                <li
+                {{-- <li
                     class="hover:bg-gray-200 hover:text-gray-800 cursor-pointer sm:justify-start px-4 h-12 flex items-center justify-center">
                     <i class="fa-regular fa-message"></i>
                     <span class="ml-3 hidden sm:block font-semibold tracking-wide ">
                         Messages</span>
-                </li>
+                </li> --}}
                 <li class="hover:bg-gray-200 hover:text-gray-800 cursor-pointer sm:justify-start px-4 h-12 flex items-center justify-center"
                     onclick="my_modal_5.showModal()">
                     <i class="fa-regular fa-square-plus"></i>

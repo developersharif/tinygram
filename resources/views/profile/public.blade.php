@@ -23,14 +23,14 @@
                             <!-- badge -->
                             {{-- <i class="fa-solid fa-circle-check scale-90"></i> --}}
                             <!-- follow button -->
-                            @if (auth()->user() != $user)
+                            @if (auth()->user()->id != $user->id)
                                 <form action="{{ route('user.follow', $user->id) }}" method="post">
                                     @csrf
                                     <input type="submit"
                                         value="{{ auth()->user()->isFollowing($user)? 'Unfollow': 'Follow' }}"
                                         class="bg-gray-800 px-2 py-1
                             text-white font-semibold text-sm rounded  text-center
-                            sm:inline-block ml-1">
+                            sm:inline-block ml-1 cursor-pointer">
                                 </form>
                             @endif
 

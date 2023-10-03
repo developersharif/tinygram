@@ -42,6 +42,8 @@ Sqlite file create
 ```bash
 touch database/database.sqlite
 ```
+```Update DB info in .env```
+
 Migrate
 ```bash
 php artisan migrate --seed

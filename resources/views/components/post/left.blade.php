@@ -155,6 +155,12 @@
             <li>
                 <a class="tooltip" data-tip="Notification" href="{{ route('user.notifications') }}">
                     <i class="fa-regular fa-bell"></i>
+                    @if (auth()->user()->unreadNotifications()->count() > 0)
+                        <sup class="badge bg-red-600  text-white scale-75 absolute top-1 left-4">
+
+                            {{ auth()->user()->unreadNotifications()->count() }}
+                        </sup>
+                    @endif
                 </a>
             </li>
             <li>

@@ -44,7 +44,7 @@ touch database/database.sqlite
 ```
 Migrate
 ```bash
-php artisan migrate:refresh --seed
+php artisan migrate --seed
 ```
 
 install Tailwindcss

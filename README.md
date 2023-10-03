@@ -47,6 +47,11 @@ Migrate
 php artisan migrate:refresh --seed
 ```
 
+install Tailwindcss
+
+```bash
+  npm install
+```
 Build Tailwindcss
 
 ```bash

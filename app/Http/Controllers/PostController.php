@@ -62,7 +62,7 @@ class PostController extends Controller
         $post = Post::find($id);
         if(request('ref')=='notification'){
             $notification = auth()->user()->Notifications()
-            ->where('type', PostLikedNotification::class)
+            // ->where('type', PostLikedNotification::class)
             ->where('data->postId', $id)->get();
             $notification->markAsRead();
         }

@@ -6,6 +6,9 @@ use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Comment;
 use App\Models\Post;
+use App\Models\User;
+use App\Notifications\PostCommenteddNotification;
+use App\Notifications\PostRepliedNotification;
 use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
@@ -33,25 +36,28 @@ class CommentController extends Controller
      */
     public function store(StoreCommentRequest $request)
     {
+        $post = Post::find($request->post_id);
         Comment::create([
             'user_id' => Auth::user()->id,
             'post_id' => $request->post_id,
             'content' => $request->content,
         ]);
-
+        $post->user->notify(new PostCommenteddNotification($post->id));
         return back();
     }
 
 
     public function reply(UpdateCommentRequest $request)
     {
+        $comment = Comment::find($request->parent_comment_id);
+        $user = User::find($comment->user_id);
         Comment::create([
             'user_id' => Auth::user()->id,
             'post_id' => $request->post_id,
             'parent_comment_id' => $request->parent_comment_id,
             'content' => $request->content,
         ]);
-
+        $user->notify(new PostRepliedNotification($comment->post_id));
         return back();
     }
     /**
@@ -83,8 +89,12 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
+        $post =Post::find($comment->post_id);
         $this->authorize("delete",$comment);
         $comment->delete();
+        $post->user->Notifications()->where('type', PostCommenteddNotification::class)
+        ->orWhere('type',PostRepliedNotification::class)
+                ->where('data->postId', $post->id)->delete();
         return back();
     }
 }

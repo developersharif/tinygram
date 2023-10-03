@@ -12,7 +12,11 @@
                     <div class="w-full p-3 mt-4 bg-white rounded shadow flex flex-shrink-0">
                         <div tabindex="0" aria-label="group icon" role="img"
                             class="focus:outline-none w-8 h-8 border rounded-full border-gray-200 flex flex-shrink-0 items-center justify-center">
-                            <i class="fa-solid fa-heart" style="color: #db1f3b;"></i>
+                            @if ($notification->type == App\Notifications\PostLikedNotification::class)
+                                <i class="fa-solid fa-heart" style="color: #db1f3b;"></i>
+                            @elseif ($notification->type == App\Notifications\PostCommenteddNotification::class)
+                                <i class="fa-regular fa-comment"></i>
+                            @endif
                         </div>
                         <div class="pl-3 w-full">
                             <div class="flex items-center justify-between w-full">

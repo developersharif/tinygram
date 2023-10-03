@@ -2,27 +2,25 @@
 
 namespace App\Notifications;
 
-use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 
-class PostLikedNotification extends Notification
+class PostRepliedNotification extends Notification
 {
     use Queueable;
 
-    private $user = null;
-    private $postId = null;
-
+    private $user;
+    private $postId;
     /**
      * Create a new notification instance.
      */
     public function __construct($postId)
     {
-        $this->user = Auth::user();
         $this->postId = $postId;
+        $this->user = Auth::user();
     }
 
     /**
@@ -54,8 +52,8 @@ class PostLikedNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            "message"=>"{$this->user->name} Liked Your Post",
-            "link"=>url("post/",$this->postId),
+            "message" => "{$this->user->name} replied to your comment",
+            "link"=>url('post'.$this->postId),
             "postId"=>$this->postId
         ];
     }

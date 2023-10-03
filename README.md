@@ -38,11 +38,8 @@ Storage Link
 ```bash
 php artisan storage:link
 ```
-Sqlite file create
-```bash
-touch database/database.sqlite
-```
-```Update DB info in .env```
+
+```##-Update DB info in .env-##```
 
 Migrate
 ```bash
@@ -100,3 +97,4 @@ Open: http://127.0.0.1:8000
 ## Authors
 
 - [@developersharif](https://www.github.com/developersharif)
+

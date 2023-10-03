@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
 use App\Models\User;
+use App\Notifications\PostLikedNotification;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -59,6 +60,12 @@ class PostController extends Controller
     public function show(string $id)
     {
         $post = Post::find($id);
+        if(request('ref')=='notification'){
+            $notification = auth()->user()->Notifications()
+            ->where('type', PostLikedNotification::class)
+            ->where('data->postId', $id)->get();
+            $notification->markAsRead();
+        }
         $comments = $post->comments()->whereNull('parent_comment_id')->with('childComments')->orderBy('id','desc')->get();
         return view('post.view',['post' => $post,"comments" => $comments]);
     }

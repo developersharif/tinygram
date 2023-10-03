@@ -3,6 +3,7 @@
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicProfileController;
@@ -55,6 +56,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/@{username}/following', [FollowerController::class,'following'])->name('user.following');
     Route::get('/@{username}/follower', [FollowerController::class,'follower'])->name('user.follower');
     Route::post('/user/{user}/follow', [FollowerController::class,'follow'])->name('user.follow');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/notifications',[NotificationController::class,'index'])->name('user.notifications');
 });
 
 Route::get('/dashboard', function () {

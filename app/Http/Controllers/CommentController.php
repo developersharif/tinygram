@@ -42,7 +42,9 @@ class CommentController extends Controller
             'post_id' => $request->post_id,
             'content' => $request->content,
         ]);
-        $post->user->notify(new PostCommenteddNotification($post->id));
+        if($post->user_id != Auth::user()->id){
+            $post->user->notify(new PostCommenteddNotification($post->id));
+        }
         return back();
     }
 
@@ -57,7 +59,9 @@ class CommentController extends Controller
             'parent_comment_id' => $request->parent_comment_id,
             'content' => $request->content,
         ]);
+        if($comment->user_id != Auth::user()->id){
         $user->notify(new PostRepliedNotification($comment->post_id));
+        }
         return back();
     }
     /**

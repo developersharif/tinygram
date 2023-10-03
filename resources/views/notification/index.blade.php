@@ -16,6 +16,8 @@
                                 <i class="fa-solid fa-heart" style="color: #db1f3b;"></i>
                             @elseif ($notification->type == App\Notifications\PostCommenteddNotification::class)
                                 <i class="fa-regular fa-comment"></i>
+                            @elseif ($notification->type == App\Notifications\PostRepliedNotification::class)
+                                <i class="fa-regular fa-comments"></i>
                             @endif
                         </div>
                         <div class="pl-3 w-full">

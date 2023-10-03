@@ -49,9 +49,9 @@ Route::prefix('like')->group(function () {
     Route::get('/{post_id}',[LikeController::class,'like'])->name('post.like');
     Route::post('/{post_id}',[LikeController::class,'unlike'])->name('post.unlike');
 })->middleware('auth');
-Route::get("/@{username}",[PublicProfileController::class,'show'])->name('user.profile');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get("/@{username}",[PublicProfileController::class,'show'])->name('user.profile');
     Route::get('/@{username}/following', [FollowerController::class,'following'])->name('user.following');
     Route::get('/@{username}/follower', [FollowerController::class,'follower'])->name('user.follower');
     Route::post('/user/{user}/follow', [FollowerController::class,'follow'])->name('user.follow');

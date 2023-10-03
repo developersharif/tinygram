@@ -63,6 +63,13 @@ Start the server
 ```
 Open: http://127.0.0.1:8000
 
+Demo Account:
+```
+Email:demo@example.com
+Password:password
+```
+
+
 
 ## Screenshots
 

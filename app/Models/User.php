@@ -90,7 +90,7 @@ class User extends Authenticatable
 
     $following_ids = $this->followings()->pluck('users.id');
 
-    $posts = Post::whereIn('user_id', $following_ids)->orderBy('id','desc')->get();
+    $posts = Post::whereIn('user_id', $following_ids)->orderBy('id','desc')->simplePaginate(16);
 
     return $posts;
 }

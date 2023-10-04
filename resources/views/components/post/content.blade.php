@@ -129,6 +129,7 @@
                 </div>
             </div>
         @endforeach
+        {!! $posts->links() !!}
     @endif
 
 </section-middle>

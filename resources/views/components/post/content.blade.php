@@ -129,7 +129,9 @@
                 </div>
             </div>
         @endforeach
-        {!! $posts->links() !!}
+        <div class="w-full mb-5">
+            {!! $posts->links() !!}
+        </div>
     @endif
 
 </section-middle>

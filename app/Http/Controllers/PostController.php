@@ -5,11 +5,17 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
 use App\Models\User;
-use App\Notifications\PostLikedNotification;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 
 class PostController extends Controller
 {
+    public function indexApi(Request $request)
+    {
+        $user = auth()->user();
+        $posts = $user->followingPosts();
+        return response()->json($posts);
+}
     /**
      * Display a listing of the resource.
      */
@@ -25,7 +31,7 @@ class PostController extends Controller
         // ->orderBy('id', 'desc')
         // ->get();
         $posts = $user->followingPosts();
-        return view('home',['posts' => $posts]);
+        return view('home', ['posts' => $posts]);
     }
 
     /**
@@ -41,17 +47,17 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-            $postBody = $request->body;
-            $photo = $request->file('photo');
-            $photo->store("public/photos");
-            $photoName = $photo->hashName();
+        $postBody = $request->body;
+        $photo = $request->file('photo');
+        $photo->store("public/photos");
+        $photoName = $photo->hashName();
 
-            $post = new Post();
-            $post->user_id = Auth::user()->id;
-            $post->body = $postBody;
-            $post->image = $photoName;
-            $post->save();
-            return redirect()->route('home')->with('post','post created successfully');
+        $post = new Post();
+        $post->user_id = Auth::user()->id;
+        $post->body = $postBody;
+        $post->image = $photoName;
+        $post->save();
+        return redirect()->route('home')->with('post', 'post created successfully');
     }
 
     /**
@@ -60,14 +66,14 @@ class PostController extends Controller
     public function show(string $id)
     {
         $post = Post::find($id);
-        if(request('ref')=='notification'){
+        if (request('ref') == 'notification') {
             $notification = auth()->user()->Notifications()
             // ->where('type', PostLikedNotification::class)
-            ->where('data->postId', $id)->get();
+                ->where('data->postId', $id)->get();
             $notification->markAsRead();
         }
-        $comments = $post->comments()->whereNull('parent_comment_id')->with('childComments')->orderBy('id','desc')->get();
-        return view('post.view',['post' => $post,"comments" => $comments]);
+        $comments = $post->comments()->whereNull('parent_comment_id')->with('childComments')->orderBy('id', 'desc')->get();
+        return view('post.view', ['post' => $post, "comments" => $comments]);
     }
 
     /**
@@ -76,8 +82,8 @@ class PostController extends Controller
     public function edit(string $id)
     {
         $post = Post::find($id);
-        $this->authorize('update',$post);
-        return view('post.edit',['post'=>$post]);
+        $this->authorize('update', $post);
+        return view('post.edit', ['post' => $post]);
     }
 
     /**
@@ -86,7 +92,7 @@ class PostController extends Controller
     public function update(StorePostRequest $request, string $id)
     {
         $post = Post::find($id);
-        if($request->hasFile('photo')){
+        if ($request->hasFile('photo')) {
             $postBody = $request->body;
             $photo = $request->file('photo');
             $photo->store("public/photos");
@@ -94,12 +100,12 @@ class PostController extends Controller
             $post->body = $postBody;
             $post->image = $photoName;
             $post->update();
-            return redirect()->route('home')->with('post','post updated successfully');
-        }else{
+            return redirect()->route('home')->with('post', 'post updated successfully');
+        } else {
             $postBody = $request->body;
             $post->body = $postBody;
             $post->update();
-            return redirect()->route('home')->with('post','post updated successfully');
+            return redirect()->route('home')->with('post', 'post updated successfully');
         }
     }
 

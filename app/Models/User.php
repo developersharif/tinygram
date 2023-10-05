@@ -45,19 +45,23 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function posts(){
+    public function posts()
+    {
         return $this->hasMany(Post::class);
     }
-    public static function getByUsername($username){
+    public static function getByUsername($username)
+    {
         return static::where('username', $username)->first();
     }
 
-    public function likedPosts(){
-        return $this->belongsToMany(Post::class,'post_likes')->withTimestamps();
+    public function likedPosts()
+    {
+        return $this->belongsToMany(Post::class, 'post_likes')->withTimestamps();
     }
 
-    public function comments(){
-        return $this->hasMany(Comment::class,'user_id')->withTimestamps();;
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'user_id')->withTimestamps();
     }
 
     public function follow(User $userToFollow)
@@ -86,13 +90,23 @@ class User extends Authenticatable
         return $this->followings->contains($user);
     }
     public function followingPosts()
-{
+    {
 
-    $following_ids = $this->followings()->pluck('users.id');
+        $following_ids = $this->followings()->pluck('users.id');
 
-    $posts = Post::whereIn('user_id', $following_ids)->orderBy('id','desc')->cursorPaginate(16);
+        $posts = Post::whereIn('user_id', $following_ids)
+        ->with("user")
+        ->withCount("comments")
+        ->withCount("likedBy")
+        ->with([
+            'likedBy' => function ($query) {
+                $query->select("name","avatar","username")
+                ->limit(4);
+            }
+        ])
+        ->orderBy('id', 'desc')->simplePaginate(2);
 
-    return $posts;
-}
+        return $posts;
+    }
 
 }

@@ -266,7 +266,7 @@
                         const scrollHeight = document.documentElement.scrollHeight;
                         const scrollPosition = window.scrollY + window.innerHeight;
                         const scrollPercentage = Math.round((scrollPosition / scrollHeight) * 100);
-                        if (scrollPercentage >= 90) {
+                        if (scrollPercentage >= 80) {
                             this.loadMore();
                         }
                     };

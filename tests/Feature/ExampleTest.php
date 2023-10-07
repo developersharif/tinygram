@@ -1,7 +1,7 @@
 <?php
 
-it('returns a successful response', function () {
-    $response = $this->get('/');
+it('returns a Error response for unAuthorized User Request', function () {
+    $response = $this->get('/login');
 
     $response->assertStatus(200);
 });

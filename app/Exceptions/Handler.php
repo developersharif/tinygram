@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Exceptions\PostTooLargeException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -17,6 +18,16 @@ class Handler extends ExceptionHandler
         'password',
         'password_confirmation',
     ];
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof PostTooLargeException) {
+            $errorMessage = 'The uploaded file is too large.';
+            session()->flash('errors', $errorMessage);
+            return back();
+        }
+
+        return parent::render($request, $exception);
+    }
 
     /**
      * Register the exception handling callbacks for the application.

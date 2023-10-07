@@ -1,7 +1,7 @@
 <section-right class=" p-4  hidden sm:block">
     <!-- Column 3 Content -->
     <div class=" w-52">
-        <small>Suggested for you . <a href="">See All</a></small>
+        <small class="text-gray-400">Suggested for you . <a href="">See All</a></small>
         <ul>
             @foreach ($suggestedUsers as $suggested_user)
                 <li>

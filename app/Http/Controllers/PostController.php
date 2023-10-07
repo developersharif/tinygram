@@ -70,7 +70,8 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        $post = Post::find($id);
+        try {
+            $post = Post::find($id);
         if (request('ref') == 'notification') {
             $notification = auth()->user()->Notifications()
             // ->where('type', PostLikedNotification::class)
@@ -79,6 +80,9 @@ class PostController extends Controller
         }
         $comments = $post->comments()->whereNull('parent_comment_id')->with('childComments')->orderBy('id', 'desc')->get();
         return view('post.view', ['post' => $post, "comments" => $comments]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -96,7 +100,8 @@ class PostController extends Controller
      */
     public function update(StorePostRequest $request, string $id)
     {
-        $post = Post::find($id);
+        try {
+            $post = Post::find($id);
         if ($request->hasFile('photo')) {
             $postBody = $request->body;
             $photo = $request->file('photo');
@@ -112,6 +117,9 @@ class PostController extends Controller
             $post->update();
             return redirect()->route('home')->with('post', 'post updated successfully');
         }
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -119,9 +127,13 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        $post = Post::find($id);
+        try {
+            $post = Post::find($id);
         $this->authorize('delete', $post);
         $post->delete();
         return redirect()->back();
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }

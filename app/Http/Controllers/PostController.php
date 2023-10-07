@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Http\Exceptions\PostTooLargeException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 
@@ -47,6 +48,7 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
+        try {
         $postBody = $request->body;
         $photo = $request->file('photo');
         $photo->store("public/photos");
@@ -58,6 +60,9 @@ class PostController extends Controller
         $post->image = $photoName;
         $post->save();
         return redirect()->route('home')->with('post', 'post created successfully');
+        } catch (PostTooLargeException $e) {
+            throw new PostTooLargeException("Error: {$e->getMessage()}", $e);
+        }
     }
 
     /**

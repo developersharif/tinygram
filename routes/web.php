@@ -60,6 +60,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/notifications', [NotificationController::class, 'index'])->name('user.notifications');
+    Route::get('/notifications/delete/{notification_id}', [NotificationController::class, 'deleteNotification'])->name('notification.delete');
 });
 
 Route::get('/dashboard', function () {

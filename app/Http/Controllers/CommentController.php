@@ -32,7 +32,9 @@ class CommentController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * create comment to post
+     * @param StoreCommentRequest $request (post_id)
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreCommentRequest $request)
     {
@@ -48,7 +50,12 @@ class CommentController extends Controller
         return back();
     }
 
-
+   /**
+     * Reply to a comment.
+     *
+     * @param UpdateCommentRequest $request (parent_comment_id)
+     * @return \Illuminate\Http\RedirectResponse
+    */
     public function reply(UpdateCommentRequest $request)
     {
         $comment = Comment::find($request->parent_comment_id);
@@ -89,7 +96,10 @@ class CommentController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete a comment and associated notifications.
+     *
+     * @param Comment $comment (post_id)
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Comment $comment)
     {

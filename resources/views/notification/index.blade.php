@@ -18,6 +18,8 @@
                                 <i class="fa-regular fa-comment"></i>
                             @elseif ($notification->type == App\Notifications\PostRepliedNotification::class)
                                 <i class="fa-regular fa-comments"></i>
+                            @elseif ($notification->type == App\Notifications\UserFollowNotification::class)
+                                <i class="fa-solid fa-rss"></i>
                             @endif
                         </div>
                         <div class="pl-3 w-full">

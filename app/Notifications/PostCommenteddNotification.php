@@ -52,7 +52,7 @@ class PostCommenteddNotification extends Notification
     {
         return [
             "message" => "{$this->user->name} commented on your post",
-            "link"=>url('post'.$this->postId),
+            "link"=>url('post',$this->postId),
             "postId"=>$this->postId
         ];
     }

@@ -22,7 +22,7 @@
                         </div>
                         <div class="pl-3 w-full">
                             <div class="flex items-center justify-between w-full">
-                                <a href="{{ route('post.show', $notification->data['postId']) }}?ref=notification"
+                                <a href="{!! $notification->data['link'] !!}?ref=notification"
                                     class="
                                     @if (!$notification->read_at) font-bold @endif
                                     ">

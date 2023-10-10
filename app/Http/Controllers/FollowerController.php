@@ -3,17 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Notifications\UserFollowNotification;
 use Illuminate\Http\Request;
 
 class FollowerController extends Controller
 {
     public function follow(User $user)
 {
-    if (!auth()->user()->isFollowing($user)) {
-        auth()->user()->followings()->attach($user);
+    $authUser = auth()->user();
+    if (!$authUser->isFollowing($user)) {
+        $authUser->followings()->attach($user);
+        $user->notify(new UserFollowNotification($user));
         return back();
     }
-    auth()->user()->followings()->detach($user);
+    $authUser->followings()->detach($user);
     return back();
 }
 

@@ -55,7 +55,7 @@ class PostLikedNotification extends Notification
     {
         return [
             "message"=>"{$this->user->name} Liked Your Post",
-            "link"=>url("post/",$this->postId),
+            "link"=>url("post",$this->postId),
             "postId"=>$this->postId
         ];
     }

@@ -22,13 +22,13 @@ class CommentController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new resource. (Demo only)
      */
     public function create()
     {
-        $post = Post::find(5);
-        $comments = $post->comments()->whereNull('parent_comment_id')->with('childComments')->orderBy('id','desc')->get();
-        return view('comment.create',['comments' => $comments]);
+        // $post = Post::find(5);
+        // $comments = $post->comments()->whereNull('parent_comment_id')->with('childComments')->orderBy('id','desc')->get();
+        // return view('comment.create',['comments' => $comments]);
     }
 
     /**

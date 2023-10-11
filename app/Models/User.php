@@ -153,7 +153,7 @@ class User extends Authenticatable
                 ->limit(4);
             }
         ])
-        ->orderBy('id', 'desc')->simplePaginate(5);
+        ->orderBy('id', 'desc')->simplePaginate(3);
 
         return $posts;
     }

@@ -1,11 +1,8 @@
-
 # Project TinyGram
 
-Tinygram is a cutting-edge social media platform 😊  that brings the world of visual storytelling to life. Developed using the power of Laravel 10 🤗
+Tinygram is a cutting-edge social media platform 😊 that brings the world of visual storytelling to life. Developed using the power of Laravel 10 🤗
 
-
-![Logo](https://i.ibb.co/mTg3XKd/tinygramlogo.png)
-
+![Logo](https://i.ibb.co/b1wwxxc/tinygram.png)
 
 ## Run Locally
 
@@ -26,22 +23,29 @@ Install dependencies
 ```bash
   composer install
 ```
+
 copy .env.example to .env
+
 ```bash
 cp .env.example .env
 ```
+
 Key Generate
+
 ```bash
 php artisan key:generate
 ```
+
 Storage Link
+
 ```bash
 php artisan storage:link
 ```
 
-```##-Update DB info in .env-##```
+`##-Update DB info in .env-##`
 
 Migrate
+
 ```bash
 php artisan migrate --seed
 ```
@@ -51,25 +55,27 @@ install Tailwindcss
 ```bash
   npm install
 ```
+
 Build Tailwindcss
 
 ```bash
   npm run build
 ```
+
 Start the server
 
 ```bash
   php artisan serve
 ```
+
 Open: http://127.0.0.1:8000
 
 Demo Account:
+
 ```
 Email:demo@example.com
 Password:password
 ```
-
-
 
 ## Screenshots
 
@@ -79,20 +85,20 @@ Password:password
 ![App Notification](https://i.ibb.co/FJFrBzP/tinygram-notice.png)
 
 ## Features
-- Auth/Authorization (Breeze Starter kit)
-- Post Crud
-- Like
-- Comment (With Nested Reply)
-- Follow/unFollow
-- Like,Comment,Reply Notification
-- Search (Users/Posts)
-- NewsFeed as User Following Lists
-- Custom Policy Applied
-- UI (Tailwindcss & DaisyUI)
-- Templeting Engine (Blade)
-- Fully ORM Based
-- Mobile First Design
 
+-   Auth/Authorization (Breeze Starter kit)
+-   Post Crud
+-   Like
+-   Comment (With Nested Reply)
+-   Follow/unFollow
+-   Like,Comment,Reply Notification
+-   Search (Users/Posts)
+-   NewsFeed as User Following Lists
+-   Custom Policy Applied
+-   UI (Tailwindcss & DaisyUI)
+-   Templeting Engine (Blade)
+-   Fully ORM Based
+-   Mobile First Design
 
 ## Tech Stack
 
@@ -100,8 +106,6 @@ Password:password
 
 **Server:** PHP8.2, Laravel10.x,Blade ,(Node,NPM to build TailwindCSS)
 
-
 ## Authors
 
-- [@developersharif](https://www.github.com/developersharif)
-
+-   [@developersharif](https://www.github.com/developersharif)

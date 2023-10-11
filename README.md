@@ -81,10 +81,10 @@ Password:password
 
 ## Screenshots
 
-![App Home](https://i.ibb.co/xzL3gfZ/tinygram-home.png)
-![App Profile](https://i.ibb.co/R9S9FtK/tinygram-profile.png)
+![App Home](https://i.ibb.co/bLbtVrk/tinygram-home.png)
+![App Profile](https://i.ibb.co/6sZJzCr/tinygram-profile.png)
 
-![App Notification](https://i.ibb.co/FJFrBzP/tinygram-notice.png)
+![App Notification](https://i.ibb.co/YpSv76b/tinygram-notice.png)
 
 ## Features
 

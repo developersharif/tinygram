@@ -14,6 +14,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @stack('cdn')
 </head>
 
 <body>
@@ -24,6 +25,7 @@
         @section('right-side')
         @show
     </main>
+    @stack('script')
 </body>
 
 </html>

@@ -2,7 +2,9 @@
 
 Tinygram is a cutting-edge social media platform 😊 that brings the world of visual storytelling to life. Developed using the power of Laravel 10 🤗
 
-![Logo](https://i.ibb.co/b1wwxxc/tinygram.png)
+<p align="center">
+<img src="https://i.ibb.co/b1wwxxc/tinygram.png" width="100" alt="tinygram logo" title="TinyGram Logo">
+</p>
 
 ## Run Locally
 

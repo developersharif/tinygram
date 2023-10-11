@@ -82,9 +82,9 @@ Password:password
 ## Screenshots
 
 ![App Home](https://i.ibb.co/bLbtVrk/tinygram-home.png)
-![App Profile](https://i.ibb.co/6sZJzCr/tinygram-profile.png)
+![App Profile](https://i.imgur.com/KYTnA5u.png)
 
-![App Notification](https://i.ibb.co/YpSv76b/tinygram-notice.png)
+![App Notification](https://i.imgur.com/obY7m32.png)
 
 ## Features
 

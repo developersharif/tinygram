@@ -137,7 +137,13 @@
                 <!-- Loading Indicator -->
                 <div class="text-center text-gray-200" x-show="loading">Loading...</div>
             </div>
-            <div class="text-center text-gray-300" x-show="finished">No more data to load</div>
+            <div class="text-center text-gray-300 mb-8" x-show="finished">
+                No more data to load
+                @if (request()->getHost() !== 'localhost')
+                    <a href="about" target="_blank" class="text-blue-400 text-xs"> 🍵 Donate</a>
+                @endif
+
+            </div>
         </div>
         {{-- infinityScroll component end --}}
     @endif

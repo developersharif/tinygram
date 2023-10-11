@@ -147,7 +147,6 @@
         </div>
         {{-- infinityScroll component end --}}
     @endif
-
     <script>
         function infiniteScrollData() {
             return {
@@ -181,6 +180,9 @@
                                     this.nextPageUrl = data.next_page_url;
                                 }
                             });
+                    }
+                    if (this.nextPageUrl === null) {
+                        this.finished = true;
                     }
                 },
             };

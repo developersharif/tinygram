@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::factory()->count(5)->create();
-        Post::factory()->count(5)->create();
+        Post::factory()->count(50)->create();
         $this->call(DemoAccountSeeder::class);
         Artisan::call("photos:move");
         // \App\Models\User::factory(10)->create();

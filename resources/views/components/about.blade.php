@@ -3,6 +3,15 @@
     body {
         font-family: 'Roboto Mono', monospace;
     }
+
+    .rounded-lg.shadow-xl.bg-gray-900.text-white {
+        background-color: black;
+        padding: 5px;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
 </style>
 @section('content')
     <script type="text/javascript">

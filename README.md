@@ -11,13 +11,13 @@ Tinygram is a cutting-edge social media platform 😊 that brings the world of v
 Clone the project
 
 ```bash
-  git clone https://github.com/developersharif/tinygram-blade.git
+  git clone https://github.com/developersharif/tinygram.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd tinygram-blade
+  cd tinygram
 ```
 
 Install dependencies
@@ -62,6 +62,12 @@ Build Tailwindcss
 
 ```bash
   npm run build
+```
+
+Run Tests
+
+```bash
+  php artisan test
 ```
 
 Start the server

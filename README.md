@@ -49,7 +49,7 @@ php artisan storage:link
 Migrate
 
 ```bash
-php artisan migrate --seed
+php artisan migrate
 ```
 
 install Tailwindcss
@@ -68,6 +68,12 @@ Run Tests
 
 ```bash
   php artisan test
+```
+
+DB Seed
+
+```bash
+php artisan db:seed
 ```
 
 Start the server

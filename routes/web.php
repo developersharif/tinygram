@@ -1,13 +1,13 @@
 <?php
 
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\FollowerController;
-use App\Http\Controllers\LikeController;
-use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\PublicProfileController;
-use App\Http\Controllers\SearchController;
+use App\Http\Controllers\Web\CommentController;
+use App\Http\Controllers\Web\FollowerController;
+use App\Http\Controllers\Web\LikeController;
+use App\Http\Controllers\Web\NotificationController;
+use App\Http\Controllers\Web\PostController;
+use App\Http\Controllers\Web\ProfileController;
+use App\Http\Controllers\Web\PublicProfileController;
+use App\Http\Controllers\Web\SearchController;
 use Illuminate\Support\Facades\Route;
 
 /*

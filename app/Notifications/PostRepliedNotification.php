@@ -53,7 +53,7 @@ class PostRepliedNotification extends Notification
     {
         return [
             "message" => "{$this->user->name} replied to your comment",
-            "link"=>url('post'.$this->postId),
+            "link"=>url('post',$this->postId),
             "postId"=>$this->postId
         ];
     }

@@ -82,6 +82,27 @@ Start the server
   php artisan serve
 ```
 
+# Or
+
+1.
+
+```bash
+git clone https://github.com/developersharif/tinygram.git && cd tinygram && composer install && cp .env.example .env
+
+```
+
+2.
+
+```bash
+Update DB info (.env)
+```
+
+3.
+
+```bash
+php artisan key:generate && php artisan storage:link && php artisan migrate && npm install && npm run build && php artisan test && php artisan db:seed && php artisan serve
+```
+
 Open: http://127.0.0.1:8000
 
 Demo Account:

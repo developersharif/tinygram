@@ -25,4 +25,12 @@ class UserRepository{
             throw $th;
         }
     }
+
+    function searchUser(string $searchKey){
+        try {
+            return User::where('name','like',"%$searchKey%")->orWhere('email','like',"%$searchKey%")->limit(45)->get();
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
 }

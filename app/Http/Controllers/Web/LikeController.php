@@ -1,44 +1,20 @@
 <?php
 
 namespace App\Http\Controllers\Web;
-
 use App\Http\Controllers\Controller;
-use App\Models\Post;
-use App\Notifications\PostLikedNotification;
-use Illuminate\Support\Facades\Auth;
+use App\Services\LikeService;
 
 class LikeController extends Controller
 {
+    protected $likedService;
+    function __construct(LikeService $likedService){
+        $this->likedService = $likedService;
+    }
     function like($post_id){
-        $post = Post::find($post_id);
-        $user = Auth::user();
-        if($post && $user){
-            if (!$user->likedPosts->contains($post->id)) {
-                $user->likedPosts()->attach($post->id);
-                $post->user->notify(new PostLikedNotification($post->id));
-                return back();
-            } else {
-                return back();
-            }
-        }else{
-            return back();
-        }
+        return $this->likedService->likeToPost($post_id);
     }
 
     function unlike($post_id){
-        $post = Post::find($post_id);
-        $user = Auth::user();
-        if($post && $user){
-            if ($user->likedPosts->contains($post->id)) {
-                $user->likedPosts()->detach($post->id);
-                $post->user->Notifications()->where('type', PostLikedNotification::class)
-                ->where('data->postId', $post->id)->delete();
-                return back();
-            } else {
-                return back();
-            }
-        }else{
-            return back();
-        }
+        return $this->likedService->unlikeToPost($post_id);
     }
 }

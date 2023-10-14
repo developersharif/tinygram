@@ -25,4 +25,20 @@ class PostRepository{
             throw $th;
         }
     }
+
+    function searchPost(string $searchKey){
+       try {
+        return Post::with('user')
+        ->with("likedBy")
+        ->where('status', 1)
+        ->where(function ($query) use ($searchKey) {
+            $query->orWhere('body', 'like', "%$searchKey%");
+        })
+        ->whereHas('user', function ($query) {
+            $query->where('status', 1);
+        });
+       } catch (\Throwable $th) {
+        throw $th;
+       }
+    }
 }

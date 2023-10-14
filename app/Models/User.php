@@ -143,8 +143,8 @@ class User extends Authenticatable
 
         $following_ids = $this->followings()->pluck('users.id');
 
-        $posts = Post::whereIn('user_id', $following_ids)
-        ->with("user")
+        $posts = Post::select("id","user_id","body","image","created_at")->whereIn('user_id', $following_ids)
+        ->with("user:id,name,username,avatar")
         ->withCount("comments")
         ->withCount("likedBy")
         ->with([

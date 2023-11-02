@@ -1,0 +1,39 @@
+version: "3"
+services:
+    web:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: tinygram-app
+        restart: unless-stopped
+        working_dir: /var/www/html
+        ports:
+            - "80:80"
+        volumes:
+            - .:/var/www/html
+        depends_on:
+            - mysql_db
+        networks:
+            - tinygram-net
+    mysql_db:
+        image: mysql:latest
+        restart: unless-stopped
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: tinygram
+        ports:
+            - 3306:3306
+        networks:
+            - tinygram-net
+    phpmyadmin:
+        image: phpmyadmin:latest
+        ports:
+            - 9001:80
+        environment:
+            - PMA_ARBITRARY=1
+        networks:
+            - tinygram-net
+
+networks:
+    tinygram-net:
+        driver: bridge

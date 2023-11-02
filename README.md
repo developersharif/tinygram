@@ -112,6 +112,41 @@ Email:demo@example.com
 Password:password
 ```
 
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+
+Clone the project
+
+```bash
+  git clone https://github.com/developersharif/tinygram.git
+```
+
+Go to the project directory
+
+```bash
+  cd tinygram
+```
+
+Build Docker Image
+#with docker desktop
+
+```bash
+docker compose build
+```
+
+Docker Up
+
+```bash
+  docker compose up -d
+```
+
+Docker initial commands
+
+```bash
+docker exec tinygram-app bash -c "cp .env.docker .env && composer install && php artisan key:generate && php artisan migrate && php artisan db:seed && npm install && npm run build && chmod -R a+rw storage/ && php artisan storage:link"
+```
+
+Open: http://localhost
+
 ## Screenshots
 
 ![App Home](https://i.ibb.co/bLbtVrk/tinygram-home.png)

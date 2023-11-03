@@ -114,6 +114,9 @@ Password:password
 
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 
+Run on play with docker
+https://labs.play-with-docker.com/
+
 Clone the project
 
 ```bash

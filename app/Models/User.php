@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-
+use App\Models\Message;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -156,6 +156,11 @@ class User extends Authenticatable
         ->orderBy('id', 'desc')->simplePaginate(3);
 
         return $posts;
+    }
+
+    public function sentMessages()
+    {
+        return $this->hasMany(Message::class, 'sender_id');
     }
 
 }

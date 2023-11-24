@@ -70,3 +70,4 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+Require __DIR__ . '/chat.php';

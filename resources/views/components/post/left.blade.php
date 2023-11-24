@@ -55,12 +55,16 @@
                         </form>
                     </dialog>
                 </li>
-                {{-- <li
+                <li
                     class="hover:bg-gray-200 hover:text-gray-800 cursor-pointer sm:justify-start px-4 h-12 flex items-center justify-center">
+
                     <i class="fa-regular fa-message"></i>
-                    <span class="ml-3 hidden sm:block font-semibold tracking-wide ">
-                        Messages</span>
-                </li> --}}
+                    <a href="{{ route('user.chat') }}">
+                        <span class="ml-3 hidden sm:block font-semibold tracking-wide ">
+                            Messages
+                        </span>
+                    </a>
+                </li>
                 <li class="hover:bg-gray-200 hover:text-gray-800 cursor-pointer sm:justify-start px-4 h-12 flex items-center justify-center"
                     onclick="my_modal_5.showModal()">
                     <i class="fa-regular fa-square-plus"></i>
@@ -153,6 +157,11 @@
                 </a>
             </li>
             <li>
+                <a class="tooltip" data-tip="Message" href="{{ route('user.chat', auth()->user()->username) }}">
+                    <i class="fa-regular fa-message"></i>
+                </a>
+            </li>
+            <li>
                 <a class="tooltip" data-tip="Notification" href="{{ route('user.notifications') }}">
                     <i class="fa-regular fa-bell"></i>
                     @if (auth()->user()->unreadNotifications()->count() > 0)
@@ -163,6 +172,7 @@
                     @endif
                 </a>
             </li>
+
             <li>
                 <a class="tooltip" data-tip="Menu" href="{{ route('user.profile', auth()->user()->username) }}">
                     <i class="fa-solid fa-bars-staggered"></i>

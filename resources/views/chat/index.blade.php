@@ -9,8 +9,8 @@
 
 @section('content')
     <section-middle class=" bg-gray-100 px-2">
-        <div class="container">
-            <div id="root"></div>
-        </div>
+
+        <div id="root"></div>
+
     </section-middle>
 @endsection

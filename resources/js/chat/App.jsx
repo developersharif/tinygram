@@ -8,13 +8,13 @@ function App() {
   const [data, setData] = useState();
   useEffect(() => {
     const loadConversations = async () => {
-      const req = await fetch(`http://127.0.0.1:8000/chat/conversations`);
+      const req = await fetch(`${window.location.origin}/chat/conversations`);
       const conversations = await req.json();
       setData((prevData) => ({ ...prevData, conversations: conversations }));
     };
 
     const loadUser = async () => {
-      let response = await fetch(`http://127.0.0.1:8000/api/user`);
+      let response = await fetch(`${window.location.origin}/api/user`);
       let user = await response.json();
       setData((prevData) => ({ ...prevData, user: user }));
     };

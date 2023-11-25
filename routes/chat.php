@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 Route::get("/chat", function(){
     return view("chat.index");
-})->name("user.chat");
+})->middleware('auth')->name("user.chat");
 
 Route::get('/api/user', function () {
     return Auth::user();
@@ -23,19 +23,19 @@ Route::prefix('/chat/conversations')->group(function(){
         ->groupBy('sender_id')
         ->selectRaw('sender_id, MAX(created_at) as last_message_timestamp')
         ->get();
-
     $result = $senderUsers->map(function ($sender) {
+        $last_message = Message::where('receiver_id', Auth::user()->id)->where('sender_id',$sender->sender_id)->orderBy('id','desc')->latest()->first();
         return [
             'id' => $sender->sender->id,
             'name' => $sender->sender->name,
             'avatar' => $sender->sender->avatar,
             'status' => 'online',
-            'last_message' => Str::limit($sender->sender->sentMessages->first()->message,20),
+            'last_message' => Str::limit($last_message->message,20),
             'timestamp' => $sender->last_message_timestamp,
         ];
     })->toArray();
         return response()->json($result);
-    })->middleware('throttle:10000');
+    });
 
 
 
@@ -60,6 +60,7 @@ Route::prefix('/chat/conversations')->group(function(){
         'senderAvatar' => $sender->avatar,
         'senderStatus' => 'online',
         'senderName' => $sender->name,
+        'senderUsername' => $sender->username,
         'messagesList' => $messageData->map(function ($message) {
             return [
                 'id' => $message->id,
@@ -93,12 +94,12 @@ Route::prefix('/chat/conversations')->group(function(){
                     'content' => $message->message,
                     'timestamp' => $message->created_at->toIso8601String(),
                 ];
-                broadcast(new ChatMessagePublished(['message'=>$formattedResponse],Auth::user()))->toOthers();
-                return response()->json(['status' => 201, 'message' => $formattedResponse]);
+                event(new ChatMessagePublished(['message'=>$formattedResponse],Auth::user()));
+                return response()->json(['message' => $formattedResponse]);
             }
         } catch (\Exception $e) {
-            return response()->json(['status' => 404, 'message' => $e->getMessage()]);
+            return response()->json(['status' => 404, 'message' =>$formattedResponse,'error'=> $e->getMessage()]);
         }
     });
 
-})->middleware('auth');
+})->middleware(['auth','throttle:10000']);

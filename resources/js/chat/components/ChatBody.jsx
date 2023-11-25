@@ -22,7 +22,7 @@ function ChatBody() {
                 messagesList: [...prevData.messagesList, e.message],
               }));
         }
-        setChatMessages(messages);
+        setChatMessages(messages); //initialize the messages
         chatMessages?.messagesList?.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
     useEcho(`ChatRoom.${chatId}`, 'ChatMessagePublished', handleMessage);
 
@@ -54,13 +54,13 @@ function ChatBody() {
     <Layout>
         <div className="content-chat-message-user active">
         <div className="head-chat-message-user">
-            <img src={`${window.location.origin}/storage/profile/${messages?.senderAvatar}`}
-                alt=""/>
+            <a href={`/@${messages?.senderUsername}`}><img src={`${window.location.origin}/storage/profile/${messages?.senderAvatar}`}
+                alt=""/></a>
             <div className="message-user-profile">
-                <p className="mt-0 mb-0 text-white"><strong>{messages?.senderName}</strong></p>
+            <a href={`/@${messages?.senderUsername}`}> <p className="mt-0 mb-0 text-white"><strong>{messages?.senderName}</strong></p>
                 <small className="text-white">
                     <p className={`${messages?.senderstatus}  mt-0 mb-0`}></p>{messages?.senderstatus}
-                </small>
+                </small> </a>
             </div>
         </div>
         <div className="body-chat-message-user" ref={chatContainerRef}>

@@ -8,7 +8,7 @@
 @endsection
 
 @section('content')
-    <section-middle class=" bg-gray-100 px-2">
+    <section-middle class=" bg-gray-100">
 
         <div id="root"></div>
 

@@ -11,10 +11,21 @@ Route::get("/chat", function(){
     return view("chat.index");
 })->middleware('auth')->name("user.chat");
 
-Route::get('/api/user', function () {
-    return Auth::user();
-})->middleware('auth');
 
+
+Route::get('/api/user', function () {
+
+})->middleware('auth');
+Route::prefix('/api/user')->group(function(){
+    Route::get('/',function(){
+        return Auth::user();
+    });
+
+    Route::get('/{id}',function(User $id){
+        return $id;
+    });
+
+})->middleware('auth');
 
 Route::prefix('/chat/conversations')->group(function(){
     Route::get("/",function(){
@@ -28,9 +39,10 @@ Route::prefix('/chat/conversations')->group(function(){
         return [
             'id' => $sender->sender->id,
             'name' => $sender->sender->name,
+            'userName'=>$sender->sender->username,
             'avatar' => $sender->sender->avatar,
-            'status' => 'online',
-            'last_message' => Str::limit($last_message->message,20),
+            'status' => 'available',
+            'lastMessage' => Str::limit($last_message->message,20),
             'timestamp' => $sender->last_message_timestamp,
         ];
     })->toArray();
@@ -57,15 +69,11 @@ Route::prefix('/chat/conversations')->group(function(){
 
         $result = [
         'status'=>200,
-        'senderAvatar' => $sender->avatar,
-        'senderStatus' => 'online',
-        'senderName' => $sender->name,
-        'senderUsername' => $sender->username,
         'messagesList' => $messageData->map(function ($message) {
             return [
                 'id' => $message->id,
                 'senderId' => $message->sender_id,
-                'content' => $message->message,
+                'text' => $message->message,
                 'timestamp' => $message->created_at,
             ];
             })->toArray(),
@@ -80,21 +88,22 @@ Route::prefix('/chat/conversations')->group(function(){
     Route::post('/{id}', function ($id, Request $request) {
         try {
             $request->validate([
-                'content' => 'required',
+                'text' => 'required',
             ]);
             $message = Message::create([
                 'sender_id' => Auth::user()->id,
                 'receiver_id' => $id,
-                'message' => $request->content,
+                'message' => $request->text,
             ]);
+            $receiver = User::find($id);
             if ($message) {
                 $formattedResponse = [
                     'id' => $message->id,
                     'senderId' => $message->sender_id,
-                    'content' => $message->message,
+                    'text' => $message->message,
                     'timestamp' => $message->created_at->toIso8601String(),
                 ];
-                event(new ChatMessagePublished(['message'=>$formattedResponse],Auth::user()));
+                broadcast(new ChatMessagePublished(['message'=>$formattedResponse],$receiver))->toOthers();
                 return response()->json(['message' => $formattedResponse]);
             }
         } catch (\Exception $e) {

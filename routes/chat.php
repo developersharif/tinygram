@@ -1,9 +1,6 @@
 <?php
-use App\Events\ChatMessagePublished;
 use App\Http\Controllers\Web\MessageController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Models\Message;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 

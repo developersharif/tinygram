@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {useEffect} from "react";
 import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
 window.Pusher = Pusher;
@@ -16,7 +17,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 const useEcho = (channel, event, callback) => {
 let listenerInstance; // Variable to track the listener instance
-//   useEffect(() => {
+  useEffect(() => {
     console.log("Setting up Laravel Echo...");
 
     const echo = new Echo({
@@ -30,19 +31,22 @@ let listenerInstance; // Variable to track the listener instance
       wssPort: import.meta.env.VITE_PUSHER_PORT ?? 443,
       forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
       enabledTransports: ['ws', 'wss'],
-    //   authEndpoint: 'http://127.0.0.1:8000/broadcasting/auth',
-    //   auth: {
-    //     headers: {
-    //       // Development Mode
-    //       Authorization: 'Bearer ' + '1|hd3ZbRx9OdNDP4eK37Hn1d0howyPKuceHALqE67Z4d6f9ac1',
-    //     },
-    //   },
+      authEndpoint: 'http://127.0.0.1:8000/broadcasting/auth',
+      auth: {
+        headers: {
+          // Development Mode
+          Authorization: 'Bearer ' + '1|hd3ZbRx9OdNDP4eK37Hn1d0howyPKuceHALqE67Z4d6f9ac1',
+        },
+      },
     });
     if (!listenerInstance) {
       // If not, create a new listener
       listenerInstance = echo.private(channel).listen(event, callback);
       console.log("Listener created:", listenerInstance);
-    }
+    } else {
+      // If a listener already exists, log a message
+      console.log("Listener already exists. Skipping creation.");
+    }    
     return () => {
       if (listenerInstance) {
         console.log("Cleaning up listener...");
@@ -50,7 +54,7 @@ let listenerInstance; // Variable to track the listener instance
         listenerInstance = null; // Reset the listener instance
       }
     };
-//   }, [channel, event, callback]);
+  }, [channel, event, callback]);
 };
 
 export default useEcho;

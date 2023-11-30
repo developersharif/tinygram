@@ -20,7 +20,7 @@ function Users() {
               name={conversation.name}
               info={conversation.lastMessage}
               active={isActive(conversation.id)}
-            >
+              unreadCnt={conversation?.unseenCount}>
               <Avatar
                 src={`${document.location.origin}/storage/profile/${conversation.avatar}`}
                 status={conversation.status}

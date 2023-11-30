@@ -71,6 +71,23 @@ export default function ChatMessage() {
             }
             loadNewConversation()
         }
+
+        if(parseInt(chatUser?.unseenCount)>0){
+            const markAsRead = async ()=>{
+                const req = await fetch(`${document.location.origin}/chat/conversations/${chatId}/mark_as_Read`);
+                const res = req.status;
+                if(res === 200) {
+                    dispatch({
+                        type:"MARK_AS_READ",
+                        senderId:chatIdInt
+                    });
+                }
+
+            }
+            markAsRead();
+
+        }
+
     }
     return (
         <>

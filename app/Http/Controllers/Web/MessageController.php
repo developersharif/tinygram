@@ -9,63 +9,81 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+
 class MessageController extends Controller
 {
-    public function conversations(){
+    public function conversations()
+    {
         $senderUsers = Message::where('receiver_id', Auth::user()->id)
-        ->with('sender')
-        ->groupBy('sender_id')
-        ->selectRaw('sender_id, MAX(created_at) as last_message_timestamp')
-        ->get();
-    $result = $senderUsers->map(function ($sender) {
-        $last_message = Message::where('receiver_id', Auth::user()->id)->where('sender_id',$sender->sender_id)->orderBy('id','desc')->latest()->first();
-        return [
-            'id' => $sender->sender->id,
-            'name' => $sender->sender->name,
-            'userName'=>$sender->sender->username,
-            'avatar' => $sender->sender->avatar,
-            'status' => 'available',
-            'lastMessage' => Str::limit($last_message->message,20),
-            'timestamp' => $sender->last_message_timestamp,
-        ];
-    })->toArray();
+            ->orWhere('sender_id', Auth::user()->id)
+            ->with('sender')
+            ->selectRaw('CASE WHEN sender_id = ? THEN receiver_id ELSE sender_id END as other_user_id, MAX(created_at) as last_message_timestamp', [Auth::user()->id])
+            ->groupBy('other_user_id')
+            ->orderBy('last_message_timestamp', 'desc')
+            ->get();
+
+        $result = $senderUsers->map(function ($sender) {
+            $otherUser = User::find($sender->other_user_id);
+            $last_message = Message::where(function ($query) use ($otherUser) {
+                $query->where('receiver_id', Auth::user()->id)
+                    ->where('sender_id', $otherUser->id);
+            })->orWhere(function ($query) use ($otherUser) {
+                $query->where('receiver_id', $otherUser->id)
+                    ->where('sender_id', Auth::user()->id);
+            })->orderBy('id', 'desc')->latest()->first();
+
+            return [
+                'id' => $otherUser->id,
+                'name' => $otherUser->name,
+                'userName' => $otherUser->username,
+                'avatar' => $otherUser->avatar,
+                'status' => 'available',
+                'lastMessage' => $last_message ? Str::limit($last_message->message, 20) : null,
+                'timestamp' => $sender->last_message_timestamp,
+            ];
+        })->toArray();
+
         return response()->json($result);
+
     }
 
-    public function getChatMessagesById($id){
+    public function getChatMessagesById($id)
+    {
         try {
             $messageData = Message::where(function ($query) use ($id) {
-             $query->where('sender_id', Auth::user()->id)
-                 ->where('receiver_id', $id);
-         })
-         ->orWhere(function ($query) use ($id) {
-             $query->where('sender_id', $id)
-                 ->where('receiver_id', Auth::user()->id);
-         })
-         ->with(['sender:id,name,avatar,status','receiver:id,name,avatar'])
-         ->limit(50)
+                $query->where('sender_id', Auth::user()->id)
+                    ->where('receiver_id', $id);
+            })
+                ->orWhere(function ($query) use ($id) {
+                    $query->where('sender_id', $id)
+                        ->where('receiver_id', Auth::user()->id);
+                })
+                ->with(['sender:id,name,avatar,status', 'receiver:id,name,avatar'])
+                ->limit(50)
          // ->orderBy('created_at', 'asc')
-         ->get();
-         $sender = User::find($id);
+                ->get();
+            $sender = User::find($id);
 
-         $result = [
-         'status'=>200,
-         'messagesList' => $messageData->map(function ($message) {
-             return [
-                 'id' => $message->id,
-                 'senderId' => $message->sender_id,
-                 'text' => $message->message,
-                 'timestamp' => $message->created_at,
-             ];
-             })->toArray(),
-         ];
-         return response()->json($result);
-         } catch (Exception $e) {
-             return response()->json(['error'=>$e->getMessage(),'status'=>404],404);
-         }
+            $result = [
+                'status' => 200,
+                'messagesList' => $messageData->map(function ($message) {
+                    return [
+                        'id' => $message->id,
+                        'senderId' => $message->sender_id,
+                        'text' => $message->message,
+                        'timestamp' => $message->created_at,
+                    ];
+                })->toArray(),
+            ];
+
+            return response()->json($result);
+        } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage(), 'status' => 404], 404);
+        }
     }
 
-    public function storeChatMessage($id, Request $request){
+    public function storeChatMessage($id, Request $request)
+    {
         try {
             $request->validate([
                 'text' => 'required',
@@ -83,11 +101,12 @@ class MessageController extends Controller
                     'text' => $message->message,
                     'timestamp' => $message->created_at->toIso8601String(),
                 ];
-                broadcast(new ChatMessagePublished(['message'=>$formattedResponse],$receiver))->toOthers();
+                broadcast(new ChatMessagePublished(['message' => $formattedResponse], $receiver))->toOthers();
+
                 return response()->json(['message' => $formattedResponse]);
             }
         } catch (\Exception $e) {
-            return response()->json(['status' => 404, 'message' =>$formattedResponse,'error'=> $e->getMessage()]);
+            return response()->json(['status' => 404, 'message' => $formattedResponse, 'error' => $e->getMessage()]);
         }
     }
 }

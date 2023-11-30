@@ -84,7 +84,7 @@ class MessageController extends Controller
             ];
 
             return response()->json($result);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage(), 'status' => 404], 404);
         }
     }

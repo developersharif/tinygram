@@ -59,9 +59,10 @@
                     class="hover:bg-gray-200 hover:text-gray-800 cursor-pointer sm:justify-start px-4 h-12 flex items-center justify-center relative">
 
                     <i class="fa-regular fa-message"></i>
-                    <a href="{{ route('user.chat') }}">
+                    <a href="{{ route('user.chat') }}" id="message-href">
                         @if (auth()->user()->countUnseenMessages() > 0)
-                            <sup class="badge bg-red-600  text-white scale-75 absolute top-1 left-4">
+                            <sup class="badge bg-red-600  text-white scale-75 absolute top-1 left-4"
+                                id="message-indicator">
 
                                 {{ auth()->user()->countUnseenMessages() }}
                             </sup>
@@ -163,10 +164,12 @@
                 </a>
             </li>
             <li>
-                <a class="tooltip" data-tip="Message" href="{{ route('user.chat', auth()->user()->username) }}">
+                <a class="tooltip" data-tip="Message" href="{{ route('user.chat', auth()->user()->username) }}"
+                    id="message-href-mobile">
                     <i class="fa-regular fa-message"></i>
                     @if (auth()->user()->countUnseenMessages() > 0)
-                        <sup class="badge bg-red-600  text-white scale-75 absolute top-1 left-4">
+                        <sup class="badge bg-red-600  text-white scale-75 absolute top-1 left-4"
+                            id="message-indicator-mobile">
 
                             {{ auth()->user()->countUnseenMessages() }}
                         </sup>

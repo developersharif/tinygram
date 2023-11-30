@@ -24,5 +24,6 @@ Route::prefix('/api/user')->group(function(){
 Route::prefix('/chat/conversations')->group(function(){
     Route::get("/",[MessageController::class,'conversations']);
     Route::get('/{id}',[MessageController::class,'getChatMessagesById']);
+    Route::get('/{id}/mark_as_Read',[MessageController::class,'markAsReadMessages']);
     Route::post('/{id}',[MessageController::class,'storeChatMessage']);
 })->middleware(['auth','throttle:10000']);

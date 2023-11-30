@@ -56,12 +56,18 @@
                     </dialog>
                 </li>
                 <li
-                    class="hover:bg-gray-200 hover:text-gray-800 cursor-pointer sm:justify-start px-4 h-12 flex items-center justify-center">
+                    class="hover:bg-gray-200 hover:text-gray-800 cursor-pointer sm:justify-start px-4 h-12 flex items-center justify-center relative">
 
                     <i class="fa-regular fa-message"></i>
                     <a href="{{ route('user.chat') }}">
-                        <span class="ml-3 hidden sm:block font-semibold tracking-wide ">
-                            Messages
+                        @if (auth()->user()->countUnseenMessages() > 0)
+                            <sup class="badge bg-red-600  text-white scale-75 absolute top-1 left-4">
+
+                                {{ auth()->user()->countUnseenMessages() }}
+                            </sup>
+                        @endif
+                        <span class="ml-3 hidden sm:block font-semibold tracking-wide">
+                            Message
                         </span>
                     </a>
                 </li>
@@ -159,6 +165,12 @@
             <li>
                 <a class="tooltip" data-tip="Message" href="{{ route('user.chat', auth()->user()->username) }}">
                     <i class="fa-regular fa-message"></i>
+                    @if (auth()->user()->countUnseenMessages() > 0)
+                        <sup class="badge bg-red-600  text-white scale-75 absolute top-1 left-4">
+
+                            {{ auth()->user()->countUnseenMessages() }}
+                        </sup>
+                    @endif
                 </a>
             </li>
             <li>

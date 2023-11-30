@@ -17,7 +17,13 @@ class MessageController extends Controller
         $senderUsers = Message::where('receiver_id', Auth::user()->id)
             ->orWhere('sender_id', Auth::user()->id)
             ->with('sender')
-            ->selectRaw('CASE WHEN sender_id = ? THEN receiver_id ELSE sender_id END as other_user_id, MAX(created_at) as last_message_timestamp', [Auth::user()->id])
+            ->selectRaw('
+            CASE
+                WHEN sender_id = ? THEN receiver_id
+                ELSE sender_id
+            END as other_user_id,
+            MAX(created_at) as last_message_timestamp,
+            SUM(CASE WHEN seen = 0 AND sender_id != ? THEN 1 ELSE 0 END) as unseen_count', [Auth::user()->id, Auth::user()->id])
             ->groupBy('other_user_id')
             ->orderBy('last_message_timestamp', 'desc')
             ->get();
@@ -40,6 +46,7 @@ class MessageController extends Controller
                 'status' => 'available',
                 'lastMessage' => $last_message ? Str::limit($last_message->message, 20) : null,
                 'timestamp' => $sender->last_message_timestamp,
+                'unseenCount' => $sender->unseen_count,
             ];
         })->toArray();
 
@@ -107,6 +114,16 @@ class MessageController extends Controller
             }
         } catch (\Exception $e) {
             return response()->json(['status' => 404, 'message' => $formattedResponse, 'error' => $e->getMessage()]);
+        }
+    }
+
+    public function markAsReadMessages($id)
+    {
+        try {
+            $user = Auth::user();
+            $user->markAsReadMessages($id);
+        } catch (\Throwable $th) {
+            return abort(404);
         }
     }
 }

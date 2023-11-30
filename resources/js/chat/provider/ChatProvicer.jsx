@@ -1,5 +1,7 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { ChatContext, ChatReducer, InitialState } from "./ChatContext";
+import useEcho from "../hook/useEcho";
+import useCurrentUser from "../hook/useCurrentUser";
 
 export default function ChatProvicer({ children }) {
     const [state, dispatch] = useReducer(ChatReducer, InitialState);
@@ -10,12 +12,31 @@ export default function ChatProvicer({ children }) {
     };
     useEffect(() => {
         const loadConversations = async () => {
-                const req = await fetch(`${document.location.origin}/chat/conversations`);
-                const conversations = await req.json();
+            const req = await fetch(
+                `${document.location.origin}/chat/conversations`
+            );
+            const conversations = await req.json();
+            dispatch({
+                type: "ADD_CONVERSATIONS",
+                payload: conversations,
+            });
+            function handleWebSocket(e) {
                 dispatch({
-                    type: "ADD_CONVERSATIONS",
-                    payload: conversations
+                    type: "ADD_MESSAGE",
+                    senderId: e.message.senderId,
+                    payload: e.message,
                 });
+                dispatch({
+                    type: "INCREMENT_UNSEEN_COUNT",
+                    senderId: e.message.senderId,
+                });
+            }
+            const user = await useCurrentUser();
+            useEcho(
+                `ChatRoom.${user.id}`,
+                "ChatMessagePublished",
+                handleWebSocket
+            );
         };
         loadConversations();
     }, [tmp]);

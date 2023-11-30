@@ -162,5 +162,25 @@ class User extends Authenticatable
     {
         return $this->hasMany(Message::class, 'sender_id');
     }
+    public function receiveMessages()
+    {
+        return $this->hasMany(Message::class, 'receiver_id');
+    }
+
+    public function countUnseenMessages()
+    {
+        return Message::where('receiver_id', $this->id)
+            ->where('seen', 0)
+            ->count();
+    }
+
+    public function markAsReadMessages($secondUserId){
+        Message::where('receiver_id', $this->id)
+            ->where('sender_id', $secondUserId)
+            ->where('seen', 0)
+            ->update(['seen' => 1]);
+
+        return response()->json([], 200);
+    }
 
 }

@@ -59,6 +59,21 @@ const ChatReducer = (state, action) => {
                         : conversation
                 ),
             };
+        case "INCREMENT_UNSEEN_COUNT":
+            return {
+                ...state,
+                conversations: state.conversations.map((conversation) =>
+                    conversation.id === action.senderId
+                        ? {
+                              ...conversation,
+                              unseenCount: (
+                                  parseInt(conversation.unseenCount) + 1
+                              ).toString(),
+                          }
+                        : conversation
+                ),
+            };
+
         case "MARK_AS_READ":
             return {
                 ...state,
@@ -71,6 +86,7 @@ const ChatReducer = (state, action) => {
                         : conversation
                 ),
             };
+
         case "ADD_MESSAGES":
             return {
                 ...state,

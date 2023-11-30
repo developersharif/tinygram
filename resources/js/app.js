@@ -1,6 +1,7 @@
 import './bootstrap';
 
 import Alpine from 'alpinejs';
+import useEcho from './chat/hook/useEcho';
 
 window.Alpine = Alpine;
 
@@ -46,5 +47,27 @@ function isLiked(likes, myId) {
   }
 window.isLiked = isLiked;
 window.timeAgo = timeAgo;
-
-
+async function hanldeWebSocket(){
+    const req = await fetch(`${document.location.origin}/api/user`);
+    const user = await req.json();
+    useEcho(`ChatRoom.${user.id}`,'ChatMessagePublished',function(e){
+        const previousMessage = document.getElementById("message-indicator");
+        const previousMessageMobile = document.getElementById("message-indicator-mobile");
+        if(previousMessage === null){
+            let messageHref = document.getElementById("message-href");
+            let messageHrefMobile = document.getElementById("message-href-mobile");
+            messageHref.insertAdjacentHTML('afterbegin',`<sup class="badge bg-red-600  text-white scale-75 absolute top-1 left-4"
+            id="message-indicator">
+    1
+        </sup>`)
+        messageHrefMobile.insertAdjacentHTML('afterbegin',`<sup class="badge bg-red-600  text-white scale-75 absolute top-1 left-4"
+            id="message-indicator">
+    1
+        </sup>`)
+        }else{
+            previousMessage.innerText = parseInt(previousMessage.innerText) + 1;
+            previousMessageMobile.innerText = parseInt(previousMessage.innerText) + 1;
+        }
+    });
+}
+hanldeWebSocket();

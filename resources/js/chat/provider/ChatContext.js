@@ -59,6 +59,18 @@ const ChatReducer = (state, action) => {
                         : conversation
                 ),
             };
+        case "MARK_AS_READ":
+            return {
+                ...state,
+                conversations: state.conversations.map((conversation) =>
+                    conversation.id === action.senderId
+                        ? {
+                              ...conversation,
+                              unseenCount: "0",
+                          }
+                        : conversation
+                ),
+            };
         case "ADD_MESSAGES":
             return {
                 ...state,

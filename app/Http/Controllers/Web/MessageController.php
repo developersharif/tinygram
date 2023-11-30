@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Events\ChatMessageCount;
 use App\Events\ChatMessagePublished;
 use App\Http\Controllers\Controller;
 use App\Models\Message;
@@ -108,8 +109,8 @@ class MessageController extends Controller
                     'text' => $message->message,
                     'timestamp' => $message->created_at->toIso8601String(),
                 ];
-                broadcast(new ChatMessagePublished(['message' => $formattedResponse], $receiver))->toOthers();
-
+                event(new ChatMessagePublished(['message' => $formattedResponse], $receiver));
+                event(new ChatMessageCount($receiver));
                 return response()->json(['message' => $formattedResponse]);
             }
         } catch (\Exception $e) {

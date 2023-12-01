@@ -8,7 +8,7 @@ import {
     MessageList,
     MessageInput,
 } from "@chatscope/chat-ui-kit-react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Layout from "./Layout";
 import { ChatContext } from "../../provider/ChatContext";
 export default function ChatMessage() {
@@ -93,7 +93,7 @@ export default function ChatMessage() {
         <>
             <Layout>
                 <ConversationHeader>
-                    <ConversationHeader.Back />
+                    <Link to="/"><ConversationHeader.Back /></Link>
                     <Avatar src={chatUser?.avatar && `${document.location.origin}/storage/profile/${chatUser.avatar}`} name={chatUser && chatUser?.name} />
                     <ConversationHeader.Content
                         userName={chatUser?.name && chatUser.name}

@@ -13,6 +13,7 @@ function Users() {
   const isActive = (id)=> (pathname.split('/').length > 1 && pathname.split("/")[1]==id)
   return (
     <>
+    <h2 style={{color:'#b4bdc7',marginTop:'10px'}}>Chats</h2>
       {state.conversations &&
         state?.conversations?.map((conversation, index) => (
           <Link to={`/${conversation.id}`} key={index}>
@@ -28,6 +29,9 @@ function Users() {
             </Conversation>
           </Link>
         ))}
+        {
+            state?.conversations?.length > 0 || (<div><p>Not Chats Availale.</p></div>)
+        }
     </>
   );
 }

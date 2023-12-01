@@ -11,6 +11,7 @@ import {
 import { Link, useParams } from "react-router-dom";
 import Layout from "./Layout";
 import { ChatContext } from "../../provider/ChatContext";
+import useWhisper, { setWhisper } from "../../hook/useWhisper";
 export default function ChatMessage() {
     const { chatId } = useParams();
     const chatIdInt = parseInt(chatId);
@@ -20,6 +21,7 @@ export default function ChatMessage() {
         (conversation) => conversation.id === chatIdInt
     )[0];
     const conversationsLoaded = state?.conversations;
+    const [typing,setTyping] = useState(false);
     useEffect(() => {
         const loadChatHistory = async () => {
             const req = await fetch(`${document.location.origin}/chat/conversations/${chatId}`);
@@ -52,6 +54,7 @@ export default function ChatMessage() {
         setMessageInputValue("");
     }
     if (conversationsLoaded) {
+        const user = state?.user;
         if(chatUser === undefined) {
             const loadNewConversation = async ()=>{
                 const req = await fetch(`${document.location.origin}/api/user/${chatId}`);
@@ -88,6 +91,23 @@ export default function ChatMessage() {
 
         }
 
+        async function listenTyping(){
+            function handleWhisperListener(e){
+                setTyping(e.typing)
+                setTimeout(()=>{
+                    setTyping(false)
+                },1000)
+            }
+            useWhisper(`ChatRoom.${user.id}`,
+        "typing",
+        handleWhisperListener);
+        }
+
+        listenTyping();
+    }
+    function handleOnChangeType(e){
+        setMessageInputValue(e)
+        setWhisper( `ChatRoom.${chatIdInt}`,"typing",{typing:true})
     }
     return (
         <>
@@ -100,12 +120,10 @@ export default function ChatMessage() {
 
                     />
                     <ConversationHeader.Actions>
-                        {/*<VoiceCallButton />
-                      <VideoCallButton />*/}
                         <InfoButton />
                     </ConversationHeader.Actions>
                 </ConversationHeader>
-                <MessageList typingIndicator={'Typing'}>
+                <MessageList typingIndicator={typing && <TypingIndicator />}>
                     {chatUser && chatUser?.messages?.map((message, index) => (
                         <Message
                             model={{
@@ -130,7 +148,7 @@ export default function ChatMessage() {
                 <MessageInput
                     placeholder="Type message here"
                     value={messageInputValue}
-                    onChange={(val) => setMessageInputValue(val)}
+                    onChange={handleOnChangeType}
                     onSend={handleSubmit}
                     attachButton={false}
                     autoFocus={true}

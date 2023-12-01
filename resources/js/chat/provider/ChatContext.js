@@ -147,6 +147,11 @@ const ChatReducer = (state, action) => {
                 };
             }
             return state;
+            case "ADD_USER":
+                return {
+                    ...state,
+                    user:action.payload,
+                };
         default:
             return state;
     }

@@ -32,6 +32,10 @@ export default function ChatProvicer({ children }) {
                 });
             }
             const user = await useCurrentUser();
+            dispatch({
+                type:'ADD_USER',
+                payload: user
+            })
             useEcho(
                 `ChatRoom.${user.id}`,
                 "ChatMessagePublished",

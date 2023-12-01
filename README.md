@@ -82,6 +82,12 @@ Start the server
   php artisan serve
 ```
 
+Start the socket server
+
+```bash
+  php artisan websockets:serve
+```
+
 # Or
 
 1.
@@ -146,6 +152,12 @@ Docker initial commands
 
 ```bash
 docker exec tinygram-app bash -c "cp .env.docker .env && composer install && php artisan key:generate && php artisan migrate && php artisan db:seed && npm install && npm run build && chmod -R a+rw storage/ && php artisan storage:link"
+```
+
+Docker initial commands
+
+```bash
+docker exec tinygram-app bash -c "php artisan websockets:serve"
 ```
 
 Open: http://localhost

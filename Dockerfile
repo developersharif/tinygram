@@ -29,3 +29,4 @@ WORKDIR /var/www/html
 USER root
 # Copy the tinygram project files to the container
 COPY . .
+EXPOSE 6001

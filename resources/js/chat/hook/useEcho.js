@@ -41,10 +41,6 @@ let listenerInstance; // Variable to track the listener instance
     if (!listenerInstance) {
       // If not, create a new listener
       listenerInstance = echo.private(channel).listen(event, callback);
-      console.log("Listener created:", listenerInstance);
-    } else {
-      // If a listener already exists, log a message
-      console.log("Listener already exists. Skipping creation.");
     }
     return () => {
       if (listenerInstance) {

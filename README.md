@@ -154,7 +154,7 @@ Docker initial commands
 docker exec tinygram-app bash -c "cp .env.docker .env && composer install && php artisan key:generate && php artisan migrate && php artisan db:seed && npm install && npm run build && chmod -R a+rw storage/ && php artisan storage:link"
 ```
 
-Docker initial commands
+Run websocket server
 
 ```bash
 docker exec tinygram-app bash -c "php artisan websockets:serve"
@@ -164,10 +164,10 @@ Open: http://localhost
 
 ## Screenshots
 
-![App Home](https://i.ibb.co/bLbtVrk/tinygram-home.png)
-![App Profile](https://i.imgur.com/KYTnA5u.png)
-
-![App Notification](https://i.imgur.com/obY7m32.png)
+![App Home](https://i.ibb.co/4tTsmmJ/2023-12-11-08-23.png)
+![App Profile](https://i.ibb.co/89TK4YY/2023-12-11-08-24.png)
+![App Notification](https://i.ibb.co/xztRYrp/2023-12-11-08-30-1.png)
+![Screencast from 2023-12-11 08-28-44](https://github.com/developersharif/tinygram/assets/54396379/0595c4e1-6495-414a-88f8-9e60e98da641)
 
 ## Features
 
@@ -175,19 +175,20 @@ Open: http://localhost
 -   Post Crud
 -   Like
 -   Comment (With Nested Reply)
--   Follow/unFollow
--   Like,Comment,Reply Notification
+-   Follow/Unfollow
+-   Like, Comment, Reply Notification
 -   Search (Users/Posts)
 -   NewsFeed as User Following Lists
+-   RealTime Messaging
 -   Custom Policy Applied
 -   UI (Tailwindcss & DaisyUI)
--   Templeting Engine (Blade)
+-   Templating Engine (Blade)
 -   Fully ORM Based
 -   Mobile First Design
 
 ## Tech Stack
 
-**Client:** Alpinejs, DaisyUI, TailwindCSS,Fontawesome
+**Client:** Alpinejs, DaisyUI, TailwindCSS, Fontawesome, Reactjs(/chat route)
 
 **Server:** PHP8.2, Laravel10.x,Blade ,(Node,NPM to build TailwindCSS)
 

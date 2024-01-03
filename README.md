@@ -167,7 +167,10 @@ Open: http://localhost
 ![App Home](https://i.ibb.co/4tTsmmJ/2023-12-11-08-23.png)
 ![App Profile](https://i.ibb.co/89TK4YY/2023-12-11-08-24.png)
 ![App Notification](https://i.ibb.co/xztRYrp/2023-12-11-08-30-1.png)
-![Screencast from 2023-12-11 08-28-44](https://github.com/developersharif/tinygram/assets/54396379/0595c4e1-6495-414a-88f8-9e60e98da641)
+## Demo Video.
+
+https://github.com/developersharif/tinygram/assets/54396379/57938efa-763d-4da1-93fc-374c9758324a
+
 
 ## Features
 
